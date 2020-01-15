@@ -13,9 +13,7 @@ public class PathInterceptor implements HandlerInterceptor {
     public boolean preHandle(HttpServletRequest request, HttpServletResponse response, Object o) throws Exception {
         System.out.println("===========进入拦截器前===========");
 
-        String requsetPath = request.getServerName() +":"+request.getServerPort()+request.getContextPath()+request.getServletPath();
-
-        response.sendRedirect(requsetPath);
+        System.out.println("当前请求地址为："+request.getServletPath());
 
         return true;
     }
