@@ -18,13 +18,14 @@ public class UnifiedExecptionResolver implements HandlerExceptionResolver {
 
     @Override
     public ModelAndView resolveException(HttpServletRequest httpServletRequest, HttpServletResponse httpServletResponse, Object o, Exception e) {
+        // 封装异常结果
         Map<String,Object>  resultMap = new HashMap<>(4);
         resultMap.put("result",e);
-        // 根据不同错误转向不同页面
+        // 判断异常类型 假如为数据处理异常，则返回首页
         if(e instanceof HandleDataExecption) {
-            System.out.println("异常提示:"+e.getMessage());
             return new ModelAndView("index", resultMap);
         }
+        // 其他异常暂不处理
         else {
             return null;
         }
