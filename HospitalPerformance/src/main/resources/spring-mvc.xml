@@ -55,7 +55,7 @@
             <!-- 拦截指定请求 -->
             <mvc:mapping path="/register/*"/>
             <!-- 使用bean定义一个Interceptor -->
-            <bean class="com.khpc.cn.core.interceptor.PathInterceptor" />
+            <bean class="com.khpc.cn.core.interceptor.MethodInterceptor" />
         </mvc:interceptor>
     </mvc:interceptors>
 
