@@ -79,4 +79,10 @@
             </bean>
         </mvc:message-converters>
     </mvc:annotation-driven>
+
+    <!-- 导入MongoDB配置文件 -->
+    <import resource="mongodb-context.xml"/>
+
+    <!-- 导入shiro配置文件 -->
+    <import resource="applicationContext-shiro.xml"/>
 </beans>

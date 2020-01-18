@@ -1,6 +1,7 @@
 package com.khpc.cn.core.resolver;
 
 import com.khpc.cn.core.entity.exception.HandleDataExecption;
+import org.apache.shiro.authc.UnknownAccountException;
 import org.springframework.web.servlet.HandlerExceptionResolver;
 import org.springframework.web.servlet.ModelAndView;
 
@@ -22,11 +23,14 @@ public class UnifiedExecptionResolver implements HandlerExceptionResolver {
         Map<String,Object>  resultMap = new HashMap<>(4);
         resultMap.put("result",e);
         // 判断异常类型 假如为数据处理异常，则返回首页
-        if(e instanceof HandleDataExecption) {
-            return new ModelAndView("index", resultMap);
+        // shiro登录权限认证异常
+        if(e instanceof UnknownAccountException){
+
+            System.out.print("登录异常");
+
+            return null;
         }
-        // 其他异常暂不处理
-        else {
+        else{
             return null;
         }
     }
