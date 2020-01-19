@@ -79,4 +79,7 @@
             </bean>
         </mvc:message-converters>
     </mvc:annotation-driven>
+
+    <!-- 导入MongoDB配置文件 -->
+    <import resource="mongodb-context.xml"/>
 </beans>
