@@ -1,11 +1,11 @@
-package com.khpc.cn.web.model.pojo;
+package com.khpc.cn.web.model.bo;
 
 /**
  * @author Vinne
- * @date 2020/1/19 0:41
- * @description
+ * @date 2020/1/20 15:31
+ * @description  注册用户传参对象
  **/
-public class User {
+public class UserBo {
 
     private String name;
 
@@ -16,9 +16,21 @@ public class User {
     private String email;
 
     /**
-     *  用户角色标志位 1.一般用户  2.填报员  3.系统管理员
+     *  参数意义同pojo对象
      */
     private String roleId;
+
+    public UserBo() {
+    }
+
+    public UserBo(String name, String password, String phoneNum, String email, String roleId) {
+        this.name = name;
+        this.password = password;
+        this.phoneNum = phoneNum;
+        this.email = email;
+        this.roleId = roleId;
+    }
+
 
     public String getName() {
         return name;

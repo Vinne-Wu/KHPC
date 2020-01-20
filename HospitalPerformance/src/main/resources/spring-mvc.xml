@@ -19,6 +19,8 @@
     <!-- 注解扫描 -->
     <context:component-scan base-package="com.khpc.cn.web.controller"/>
 
+    <context:component-scan base-package="com.khpc.cn.web.service.impl"/>
+
     <!-- freemarker配置 -->
     <bean id="freemarkerConfig"
           class="org.springframework.web.servlet.view.freemarker.FreeMarkerConfigurer">

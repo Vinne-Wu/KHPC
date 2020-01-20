@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>公立医院绩效考核系统</title>
+    <link rel="stylesheet" href="/static/assets/common.css">
+    <link rel="stylesheet" href="/static/assets/bootstrap/css/bootstrap.min.css">
+    <link rel="stylesheet" href="/static/assets/font-awesome/css/font-awesome.min.css">
+    <link rel="stylesheet" href="/static/assets/css/form-elements.css">
+    <link rel="stylesheet" href="/static/assets/css/style.css">
+    <script src="/static/assets/html5shiv.js"></script>
+    <script src="/static/assets/respond.min.js"></script>
+    <link rel="shortcut icon" href="/static/assets/ico/favicon.png">
+    <link rel="apple-touch-icon-precomposed" sizes="144x144" href="/static/assets/ico/apple-touch-icon-144-precomposed.png">
+    <link rel="apple-touch-icon-precomposed" sizes="114x114" href="/static/assets/ico/apple-touch-icon-114-precomposed.png">
+    <link rel="apple-touch-icon-precomposed" sizes="72x72" href="/static/assets/ico/apple-touch-icon-72-precomposed.png">
+    <link rel="apple-touch-icon-precomposed" href="/static/assets/ico/apple-touch-icon-57-precomposed.png">
+    <script src="/static/assets/js/jquery-1.11.1.min.js"></script>
+    <script src="/static/assets/bootstrap/js/bootstrap.min.js"></script>
+    <script src="/static/assets/js/jquery.backstretch.min.js"></script>
+    <script src="/static/assets/js/retina-1.1.0.min.js"></script>
+    <script src="/static/assets/js/scripts.js"></script>
+    <script src="/static/assets/js/placeholder.js"></script>
+    <!-- 引入页面处理Js -->
+    <script src="/static/js/register/register.js"></script>
+    <!-- 引入字体包样式 -->
+    <script src="/static/font-awesome/css/font-awesome.min.css"></script>
+</head>
+
+<body>
+<!-- Top menu -->
+<nav class="navbar navbar-inverse navbar-no-bg" role="navigation">
+    <div class="container">
+        <div class="navbar-header">
+            <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#top-navbar-1">
+                <span class="sr-only">Toggle navigation</span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+            </button>
+        </div>
+    </div>
+</nav>
+
+<!-- Top content -->
+<div class="top-content">
+
+    <div class="inner-bg">
+        <div class="container">
+             <div class="row">
+<!--                <div class="col-sm-7 text">-->
+<!--                    <h1><strong>公立医院绩效考核系统</strong></h1>-->
+<!--                    <div class="description">-->
+<!--                        <p>-->
+<!--                            Public hospital performance appraisal system is an accurate, efficient and objective performance appraisal information system-->
+<!--                        </p>-->
+<!--                    </div>-->
+<!--                </div>-->
+                <div class="col-sm-5 form-box" style="margin-left:30%">
+                    <div class="form-top">
+                        <div class="form-top-left">
+                            <h3><strong>用户注册</strong></h3>
+                            <p>请填写注册账户信息</p>
+                        </div>
+                        <div class="form-top-right">
+                            <i class="fa fa-pencil"></i>
+                        </div>
+                    </div>
+                    <div class="form-bottom">
+                        <form role="form" action="" method="post" class="registration-form">
+                            <div class="form-group" style="position: relative;">
+                                <a style="position:absolute;top:10px;left:20px;"><i class="fa fa-envelope-o" aria-hidden="true"></i></a> <input type="text" id="email" placeholder="注册邮箱账号" class="form-control" style="padding-left:45px;">
+                            </div>
+                            <div class="form-group" style="position: relative;">
+                                <a style="position:absolute;top:10px;left:20px;"><i class="fa fa-lock" aria-hidden="true"></i></a><input type="password" id="password" placeholder="密码" class="form-control" style="height:50px; margin: 0;padding: 0 20px;vertical-align: middle;background: #f8f8f8;border: 3px solid #ddd;font-family: 'Roboto', sans-serif;font-size: 16px;font-weight: 300;line-height: 50px;color: #888;-moz-border-radius: 4px;-webkit-border-radius: 4px;-moz-box-shadow: none;-webkit-box-shadow: none;-o-transition: all .3s;-moz-transition: all .3s;-webkit-transition: all .3s;-ms-transition: all .3s;padding-left:45px;">
+                            </div>
+                            <div class="form-group" style="position: relative;">
+                                <a style="position:absolute;top:10px;left:20px;"><i class="fa fa-user" aria-hidden="true"></i> </a><input type="text" id="name" placeholder="个人昵称" class="form-control" style="padding-left:45px;">
+                            </div>
+                            <div class="form-group" style="position: relative;">
+                                <a style="position:absolute;top:10px;left:20px;"><i class="fa fa-phone-square" aria-hidden="true"></i> </a> <input type="text" id="phoneNum" placeholder="手机号码" class="form-control" style="padding-left:45px;">
+                            </div>
+                            <div>
+                                <button class="btn" style="width: 100%" onclick="registerUser()">注&nbsp;&nbsp;&nbsp;&nbsp;册</button>
+                            </div>
+                            <div class="agreement gap" style="margin-top: 20px;">
+                                <div class="text-right" style="font-size:14px;">
+                                    <div class="pull-left">已有账号，<a href="javaScript:void(0)" onclick="returnLogin()" class="link">登录</a></div><p>注册即代表您已阅读并同意《<a href="javascript:void(0)" class="link">使用协议</a>》</p>
+                                </div>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+</body>
+
+</html>

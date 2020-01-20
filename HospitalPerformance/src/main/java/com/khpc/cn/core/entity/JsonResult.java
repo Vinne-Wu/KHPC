@@ -3,7 +3,7 @@ package com.khpc.cn.core.entity;
 /**
  * @author Vinne
  * @date 2020/1/14 21:48
- * @description
+ * @description 回调消息类
  **/
 public class JsonResult<T> extends Result {
 

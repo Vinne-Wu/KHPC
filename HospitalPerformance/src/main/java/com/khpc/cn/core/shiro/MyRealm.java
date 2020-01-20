@@ -9,8 +9,6 @@ import org.apache.shiro.authz.SimpleAuthorizationInfo;
 import org.apache.shiro.realm.AuthorizingRealm;
 import org.apache.shiro.subject.PrincipalCollection;
 import org.springframework.data.mongodb.core.query.Criteria;
-import org.springframework.util.DigestUtils;
-
 import java.io.UnsupportedEncodingException;
 import java.security.NoSuchAlgorithmException;
 import java.util.HashMap;
@@ -52,7 +50,7 @@ public class MyRealm extends AuthorizingRealm {
         // 第二步：根据用户输入从数据库查询用户信息
         Criteria criteria = new Criteria();
         try {
-            criteria.and("email").is(loginId).and("password").is(Md5SecurityUtil.EncoderByMd5(password));
+            criteria.and("email").is(loginId).and("password").is(Md5SecurityUtil.EncoderByMd5(password,"utf-8"));
         } catch (NoSuchAlgorithmException e) {
             e.printStackTrace();
         } catch (UnsupportedEncodingException e) {

@@ -1,5 +1,4 @@
 package com.khpc.cn.core.mongo;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.mongodb.core.MongoTemplate;
 import org.springframework.data.mongodb.core.query.Criteria;
@@ -52,6 +51,24 @@ public class MongoCore {
         Query coreQuery= new Query();
         coreQuery.addCriteria(criteria);
         return mongoCoreUtil.mongoTemplate.findOne(coreQuery,pojoClass,collectionName);
+    }
+
+    /**
+     *  数据插入
+     * @param object
+     * @param collectionName
+     */
+    public static void addOne(Object object,String collectionName){
+          mongoCoreUtil.mongoTemplate.save(object,collectionName);
+    }
+
+    /**
+     *  批量数据插入
+     * @param object
+     * @param collectionName
+     */
+    public static void addBathData(List object, String collectionName){
+        mongoCoreUtil.mongoTemplate.insert(object,collectionName);
     }
 
 
