@@ -13,8 +13,7 @@
             </util:map>
         </property>
         <!-- 未登录跳转页面，请求地址将由formAuthenticationFilter进行表单认证 -->
-        <!-- 本项目通过ajax访问，由ShiroLoginFilter中处理返回json信息 -->
-        <!--<property name="loginUrl" value="/notLogin"></property>-->
+        <property name="loginUrl" value="/api/sys/login"></property>
 
         <!-- 认证成功统一跳转到页面，建议不配置，shiro认证成功会默认跳转到上一个请求路径 -->
         <!-- 本项目通过ajax访问，loginController#loging中直接返回json信息 -->
@@ -32,7 +31,9 @@
                 <!--开放登陆接口-->
                 /api/sys/login = anon
                 /api/sys/logout = anon
-                /login.html = anon
+
+                /register/registerPage = anon
+                /register/registerUser = anon
                 <!-- /**=authc 所有的url都必须通过认证才可以访问 -->
                 /** = authc
                 <!-- /**=anon 所有的url都可以匿名访问,不能配置在最后一排，不然所有的请求都不会拦截 -->

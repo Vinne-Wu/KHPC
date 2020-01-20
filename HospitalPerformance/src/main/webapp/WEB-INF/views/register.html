@@ -70,28 +70,26 @@
                         </div>
                     </div>
                     <div class="form-bottom">
-                        <form role="form" action="" method="post" class="registration-form">
-                            <div class="form-group" style="position: relative;">
-                                <a style="position:absolute;top:10px;left:20px;"><i class="fa fa-envelope-o" aria-hidden="true"></i></a> <input type="text" id="email" placeholder="注册邮箱账号" class="form-control" style="padding-left:45px;">
+                        <div class="form-group" style="position: relative;">
+                            <a style="position:absolute;top:10px;left:20px;"><i class="fa fa-envelope-o" aria-hidden="true"></i></a> <input type="text" id="email" placeholder="注册邮箱账号" class="form-control" style="padding-left:45px;">
+                        </div>
+                        <div class="form-group" style="position: relative;">
+                            <a style="position:absolute;top:10px;left:20px;"><i class="fa fa-lock" aria-hidden="true"></i></a><input type="password" id="password" placeholder="密码" class="form-control" style="height:50px; margin: 0;padding: 0 20px;vertical-align: middle;background: #f8f8f8;border: 3px solid #ddd;font-family: 'Roboto', sans-serif;font-size: 16px;font-weight: 300;line-height: 50px;color: #888;-moz-border-radius: 4px;-webkit-border-radius: 4px;-moz-box-shadow: none;-webkit-box-shadow: none;-o-transition: all .3s;-moz-transition: all .3s;-webkit-transition: all .3s;-ms-transition: all .3s;padding-left:45px;">
+                        </div>
+                        <div class="form-group" style="position: relative;">
+                            <a style="position:absolute;top:10px;left:20px;"><i class="fa fa-user" aria-hidden="true"></i> </a><input type="text" id="name" placeholder="个人昵称" class="form-control" style="padding-left:45px;">
+                        </div>
+                        <div class="form-group" style="position: relative;">
+                            <a style="position:absolute;top:10px;left:20px;"><i class="fa fa-phone-square" aria-hidden="true"></i> </a> <input type="text" id="phoneNum" placeholder="手机号码" class="form-control" style="padding-left:45px;">
+                        </div>
+                        <div>
+                            <button class="btn" style="width: 100%" onclick="registerUser()">注&nbsp;&nbsp;&nbsp;&nbsp;册</button>
+                        </div>
+                        <div class="agreement gap" style="margin-top: 20px;">
+                            <div class="text-right" style="font-size:14px;">
+                                <div class="pull-left">已有账号，<a href="javaScript:void(0)" onclick="returnLogin()" class="link">登录</a></div><p>注册即代表您已阅读并同意《<a href="javascript:void(0)" class="link">使用协议</a>》</p>
                             </div>
-                            <div class="form-group" style="position: relative;">
-                                <a style="position:absolute;top:10px;left:20px;"><i class="fa fa-lock" aria-hidden="true"></i></a><input type="password" id="password" placeholder="密码" class="form-control" style="height:50px; margin: 0;padding: 0 20px;vertical-align: middle;background: #f8f8f8;border: 3px solid #ddd;font-family: 'Roboto', sans-serif;font-size: 16px;font-weight: 300;line-height: 50px;color: #888;-moz-border-radius: 4px;-webkit-border-radius: 4px;-moz-box-shadow: none;-webkit-box-shadow: none;-o-transition: all .3s;-moz-transition: all .3s;-webkit-transition: all .3s;-ms-transition: all .3s;padding-left:45px;">
-                            </div>
-                            <div class="form-group" style="position: relative;">
-                                <a style="position:absolute;top:10px;left:20px;"><i class="fa fa-user" aria-hidden="true"></i> </a><input type="text" id="name" placeholder="个人昵称" class="form-control" style="padding-left:45px;">
-                            </div>
-                            <div class="form-group" style="position: relative;">
-                                <a style="position:absolute;top:10px;left:20px;"><i class="fa fa-phone-square" aria-hidden="true"></i> </a> <input type="text" id="phoneNum" placeholder="手机号码" class="form-control" style="padding-left:45px;">
-                            </div>
-                            <div>
-                                <button class="btn" style="width: 100%" onclick="registerUser()">注&nbsp;&nbsp;&nbsp;&nbsp;册</button>
-                            </div>
-                            <div class="agreement gap" style="margin-top: 20px;">
-                                <div class="text-right" style="font-size:14px;">
-                                    <div class="pull-left">已有账号，<a href="javaScript:void(0)" onclick="returnLogin()" class="link">登录</a></div><p>注册即代表您已阅读并同意《<a href="javascript:void(0)" class="link">使用协议</a>》</p>
-                                </div>
-                            </div>
-                        </form>
+                        </div>
                     </div>
                 </div>
             </div>

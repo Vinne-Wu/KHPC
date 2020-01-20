@@ -12,6 +12,7 @@ import org.apache.shiro.subject.Subject;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.ResponseBody;
 
 import javax.servlet.http.HttpServletRequest;
 import java.util.Map;
@@ -24,15 +25,22 @@ import java.util.Map;
 @Controller
 @RequestMapping("/api/sys")
 public class ComManagerController {
+
+
+    @RequestMapping(value = "/login")
+    public String login(HttpServletRequest request){
+        return "login";
+    }
+
     /**
-     * 登陆
-     *
+     * 校验登陆信息
      * @param loginId  登录账号
      * @param password 密码
      */
 
-    @RequestMapping(value = "/login")
-    public Object login(String loginId, String password, HttpServletRequest req) {
+    @RequestMapping(value = "/checkLogin")
+    @ResponseBody
+    public Object checkLogin(String loginId, String password, HttpServletRequest req) {
         final String host = req.getRemoteHost();
         // 在认证提交前准备 token（令牌）
         UsernamePasswordToken token = new UsernamePasswordToken(loginId, password, host);
