@@ -1,24 +1,40 @@
 package com.khpc.cn.web.model.pojo;
 
+import java.io.Serializable;
+
 /**
  * @author Vinne
  * @date 2020/1/19 0:41
  * @description
  **/
-public class User {
+public class User implements Serializable {
 
+    private static final long serialVersionUID = -2423356247995006863L;
+
+    /**
+     *  用户名称（昵称）
+     */
     private String name;
 
+    /**
+     *  密码
+     */
     private String password;
 
+    /**
+     *  电话号码
+     */
     private String phoneNum;
 
+    /**
+     *  用户邮箱
+     */
     private String email;
 
     /**
-     *  用户角色标志位 1.一般用户  2.填报员  3.系统管理员
+     *  用户角色标志位 1.person 普通用户  2.register 数据填报员  3.admin 系统管理员
      */
-    private String roleId;
+    private String role;
 
     public String getName() {
         return name;
@@ -52,11 +68,11 @@ public class User {
         this.email = email;
     }
 
-    public String getRoleId() {
-        return roleId;
+    public String getRole() {
+        return role;
     }
 
-    public void setRoleId(String roleId) {
-        this.roleId = roleId;
+    public void setRole(String role) {
+        this.role = role;
     }
 }

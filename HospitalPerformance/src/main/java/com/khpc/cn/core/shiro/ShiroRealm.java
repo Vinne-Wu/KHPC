@@ -20,7 +20,7 @@ import java.util.Map;
  * @date 2020/1/18 23:59
  * @description
  **/
-public class MyRealm extends AuthorizingRealm {
+public class ShiroRealm extends AuthorizingRealm {
     /**
      * 设置realm的名称
      */
@@ -39,14 +39,13 @@ public class MyRealm extends AuthorizingRealm {
     @Override
     protected AuthenticationInfo doGetAuthenticationInfo(AuthenticationToken token) throws AuthenticationException{
         // token是用户输入的用户名和密码
-        // 第一步从token中取出用户名
+        // 第一步从token中取出用户名，这里用用户邮箱作为唯一认证名
         final String loginId = (String) token.getPrincipal();
         String password = null;
         final Object credentials = token.getCredentials();
         if (credentials instanceof char[]) {
             password = new String((char[]) credentials);
         }
-
         // 第二步：根据用户输入从数据库查询用户信息
         Criteria criteria = new Criteria();
         try {
@@ -56,21 +55,13 @@ public class MyRealm extends AuthorizingRealm {
         } catch (UnsupportedEncodingException e) {
             e.printStackTrace();
         }
-        User user =(User) MongoCore.selectOne(criteria,User.class,"Users");
+        User user =(User) MongoCore.selectOne(criteria,User.class,"user");
         if (user == null) {
             throw new UnknownAccountException("账号或密码错误");
         }
-        // 从数据库查询到密码
-//        //配合shiro配置的mc5加密(应该可以配置为不加密)
-////        if (password != null) {
-////            password = DigestUtils.md5Hex(password);
-////        }
-        //加密的盐
-        //String salt = user.getSalt();
-
-        final HashMap<String, Object> principal = new HashMap<>();
+        final HashMap<String, Object> principal = new HashMap<>(4);
         principal.put("user", user);
-        return new SimpleAuthenticationInfo(principal, password, this.getName());
+        return new SimpleAuthenticationInfo(principal, user.getPassword(), this.getName());
     }
 
     /**
@@ -84,13 +75,10 @@ public class MyRealm extends AuthorizingRealm {
         //从principals获取主身份信息，将getPrimaryPrincipal方法返回值转为真实身份类型（在上边doGetAuthenticationInfo认证通过填充到SimpleAuthenticationInfo中的身份类型）
         Map principal = (Map) principals.getPrimaryPrincipal();
         User user = (User) principal.get("user");
-        List<String> permissions = (List<String>) principal.get("permissions");
-        //查到权限数据，返回授权信息(要包括上边的permissions)
+        //返回授权信息(暂不考虑权限分配的问题，只关注角色信息)
         SimpleAuthorizationInfo simpleAuthorizationInfo = new SimpleAuthorizationInfo();
-        //这里添加用户有的权限列表
-        simpleAuthorizationInfo.addStringPermissions(permissions);
         //这里添加用户所拥有的角色
-        simpleAuthorizationInfo.addRole(user.getRoleId());
+        simpleAuthorizationInfo.addRole(user.getRole());
         return simpleAuthorizationInfo;
     }
 }

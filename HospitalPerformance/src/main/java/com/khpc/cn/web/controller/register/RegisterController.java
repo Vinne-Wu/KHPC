@@ -15,7 +15,7 @@ import java.util.Date;
 /**
  * @author Vinne
  * @date 2020/1/14 21:19
- * @description
+ * @description   注册员功能处理类
  **/
 @Controller
 @RequestMapping(value = "/register")
@@ -23,33 +23,13 @@ public class RegisterController {
 
    private static Logger logger = Logger.getLogger(RegisterController.class);
 
-   @Autowired
-   private RegisterService registerService;
-
     /**
-     *  首页
+     *  填报员首页
      * @return
      */
-   @RequestMapping(value = "/registerPage")
-   public String registerPage(){
-       logger.info((new Date()).toString()+"访问注册页面");
-       return "register";
-   }
-
-    /**
-     *  返回登录页面
-     * @return
-     */
-    @RequestMapping(value = "/returnLogin")
-    public String returnLogin(){
-        logger.info((new Date()).toString()+"由注册页面返回至登录页面");
-        return "login";
+    @RequestMapping(value = "/registerIndex")
+    public String registerIndex(){
+        logger.info((new Date()).toString()+"注册员首页");
+        return "register/registerIndex";
     }
-
-    @RequestMapping(value = "/registerUser")
-    @ResponseBody
-    public JsonResult<Integer> registerUser(@RequestBody UserBo userBo) throws Exception{
-        return registerService.addRegisterUser(userBo);
-    }
-
 }

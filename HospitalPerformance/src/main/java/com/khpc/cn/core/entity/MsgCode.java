@@ -5,7 +5,7 @@ package com.khpc.cn.core.entity;
  * @date 2020/1/20 16:33
  * @description
  **/
-public class MessageCode {
+public class MsgCode {
 
     public static final Integer SCCESS_CODE = 200;
 

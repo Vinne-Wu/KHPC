@@ -1,7 +1,7 @@
 package com.khpc.cn.web.service.impl;
 
 import com.khpc.cn.core.entity.JsonResult;
-import com.khpc.cn.core.entity.MessageCode;
+import com.khpc.cn.core.entity.MsgCode;
 import com.khpc.cn.core.mongo.MongoCore;
 import com.khpc.cn.core.util.Md5SecurityUtil;
 import com.khpc.cn.web.model.bo.UserBo;
@@ -24,12 +24,12 @@ public class RegisterServiceImpl implements RegisterService {
         user.setName(bo.getName());
         user.setPassword(Md5SecurityUtil.EncoderByMd5(bo.getPassword(),"utf-8"));
         user.setPhoneNum(bo.getPhoneNum());
-        user.setRoleId(bo.getRoleId());
+        user.setRole(bo.getRole());
         try {
             MongoCore.addOne(user,"user");
-            return new JsonResult<>(MessageCode.SCCESS_CODE,"添加成功！",1);
+            return new JsonResult<>(MsgCode.SCCESS_CODE,"添加成功！",1);
         }catch (Exception e){
-            return new JsonResult<>(MessageCode.ERRRO_CODE,"添加失败！",0);
+            return new JsonResult<>(MsgCode.ERRRO_CODE,"添加失败！",0);
         }
     }
 }

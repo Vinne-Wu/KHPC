@@ -2,7 +2,7 @@
  * 跳转到登录页面
  */
 function returnLogin() {
-    window.location.href = "/register/returnLogin";
+    window.location.href = "/common/returnLogin";
 }
 
 /**
@@ -15,12 +15,12 @@ function registerUser() {
          "password":$("#password").val(),
          "phoneNum":$("#phoneNum").val(),
          "email":$("#email").val(),
-         "roleId":"1"
+         "role":"person"
     }
 
     $.ajax({
         type: "POST",
-        url:"/register/registerUser",
+        url:"/common/registerUser",
         data:JSON.stringify(user),
         contentType: 'application/json;charset=utf-8',
         dataType:'json',

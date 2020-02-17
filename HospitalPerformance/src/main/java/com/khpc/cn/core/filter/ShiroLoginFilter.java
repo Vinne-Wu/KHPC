@@ -13,6 +13,9 @@ import java.io.PrintWriter;
 import java.util.HashMap;
 import java.util.Map;
 
+/**
+ * @author Vinnie
+ */
 public class ShiroLoginFilter extends FormAuthenticationFilter {
 
     /**
@@ -54,7 +57,8 @@ public class ShiroLoginFilter extends FormAuthenticationFilter {
         final HttpServletResponse response2 = (HttpServletResponse) response;
 
         //ajax访问接口返回数据结构
-        if (WebUtil.isAjax(request2)) {// ajax接口
+        if (WebUtil.isAjax(request2)) {
+            // ajax接口
             //这里是个坑，如果不设置的接受的访问源，那么前端都会报跨域错误，因为这里还没到corsConfig里面
             response2.setHeader("Access-Control-Allow-Origin", request2.getHeader("Origin"));
             response2.setHeader("Access-Control-Allow-Credentials", "true");
@@ -81,14 +85,6 @@ public class ShiroLoginFilter extends FormAuthenticationFilter {
             //其他情况
             //shiro处理
             super.onAccessDenied(request, response);
-
-            //其他处理方式
-
-            // 页面，直接跳转登录页面
-            //redirect("login.html", request2, response2);
-
-            //web.xml处理
-            //response2.setStatus(401);// 客户试图未经授权访问受密码保护的页面。
         }
         return false;
     }

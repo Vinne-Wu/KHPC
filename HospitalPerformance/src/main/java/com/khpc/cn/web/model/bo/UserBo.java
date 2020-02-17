@@ -1,11 +1,16 @@
 package com.khpc.cn.web.model.bo;
 
+import java.io.Serializable;
+
 /**
  * @author Vinne
  * @date 2020/1/20 15:31
  * @description  注册用户传参对象
  **/
-public class UserBo {
+public class UserBo implements Serializable {
+
+
+    private static final long serialVersionUID = 889715387576375277L;
 
     private String name;
 
@@ -15,22 +20,20 @@ public class UserBo {
 
     private String email;
 
+    private Boolean rememberMe;
+
     /**
      *  参数意义同pojo对象
      */
-    private String roleId;
+    private String role;
 
-    public UserBo() {
+    public Boolean getRememberMe() {
+        return rememberMe;
     }
 
-    public UserBo(String name, String password, String phoneNum, String email, String roleId) {
-        this.name = name;
-        this.password = password;
-        this.phoneNum = phoneNum;
-        this.email = email;
-        this.roleId = roleId;
+    public void setRememberMe(Boolean rememberMe) {
+        this.rememberMe = rememberMe;
     }
-
 
     public String getName() {
         return name;
@@ -64,11 +67,11 @@ public class UserBo {
         this.email = email;
     }
 
-    public String getRoleId() {
-        return roleId;
+    public String getRole() {
+        return role;
     }
 
-    public void setRoleId(String roleId) {
-        this.roleId = roleId;
+    public void setRole(String role) {
+        this.role = role;
     }
 }
