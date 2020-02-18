@@ -73,6 +73,18 @@ public class ComManagerController {
     }
 
     /**
+     *  监测邮箱是否已经注册
+     * @param userBo
+     * @return
+     * @throws Exception
+     */
+    @RequestMapping(value = "/checkRepeatEmail")
+    @ResponseBody
+    public JsonResult<Integer> checkRepeatEmail(@RequestBody UserBo userBo) throws Exception{
+        return registerService.checkRepeatEmail(userBo);
+    }
+
+    /**
      *  返回登录页面
      * @return
      */
@@ -136,5 +148,14 @@ public class ComManagerController {
     public String unauthorRefuse(){
         logger.info((new Date()).toString()+"访问注册页面");
         return "/error/403";
+    }
+
+    /**
+     * 公共消息页
+     * @return
+     */
+    @RequestMapping(value = "/commonPage")
+    public String commonPage(){
+        return "message/msgInfo";
     }
 }

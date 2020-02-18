@@ -7,6 +7,7 @@ import com.khpc.cn.core.util.Md5SecurityUtil;
 import com.khpc.cn.web.model.bo.UserBo;
 import com.khpc.cn.web.model.pojo.User;
 import com.khpc.cn.web.service.RegisterService;
+import org.springframework.data.mongodb.core.query.Criteria;
 import org.springframework.stereotype.Service;
 
 /**
@@ -30,6 +31,18 @@ public class RegisterServiceImpl implements RegisterService {
             return new JsonResult<>(MsgCode.SCCESS_CODE,"添加成功！",1);
         }catch (Exception e){
             return new JsonResult<>(MsgCode.ERRRO_CODE,"添加失败！",0);
+        }
+    }
+
+    @Override
+    public JsonResult<Integer> checkRepeatEmail(UserBo bo) throws Exception {
+        Criteria criteria = new Criteria();
+        criteria.and("email").is(bo.getEmail());
+        User result = (User) MongoCore.selectOne(criteria,User.class,"user");
+        if(result == null){
+            return  new JsonResult<>(MsgCode.SCCESS_CODE,"查询成功！",0);
+        }else {
+            return  new JsonResult<>(MsgCode.SCCESS_CODE,"邮箱邮件注册！",1);
         }
     }
 }

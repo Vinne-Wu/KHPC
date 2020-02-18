@@ -25,7 +25,7 @@
     <script src="/static/assets/js/scripts.js"></script>
     <script src="/static/assets/js/placeholder.js"></script>
     <!-- 引入页面处理Js -->
-    <script src="/static/js/register/register.js"></script>
+    <script src="/static/js/login/login.js"></script>
     <!-- 引入字体包样式 -->
     <script src="/static/font-awesome/css/font-awesome.min.css"></script>
 </head>
@@ -97,5 +97,11 @@
     </div>
 </div>
 </body>
+
+<!-- 消息提示部分 -->
+<div id="commonPage"></div>
+<script>
+    $("#commonPage").load("/common/commonPage");
+</script>
 
 </html>

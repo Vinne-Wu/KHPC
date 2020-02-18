@@ -17,4 +17,10 @@ public interface RegisterService {
      */
     JsonResult<Integer> addRegisterUser(UserBo bo) throws Exception;
 
+    /**
+     * 监测邮箱是否重复注册
+     * @param bo
+     * @return
+     */
+    JsonResult<Integer> checkRepeatEmail(UserBo bo) throws Exception;
 }
