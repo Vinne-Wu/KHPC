@@ -49,7 +49,7 @@ function login() {
                 let role = data.result.user.role;
                 returnPageByRole(role);
             }else{
-                comResultMsg("2","失败！","系统异常！");
+                comResultMsg("2","失败！","账号或者密码错误！");
             }
         },
         error: function() {
@@ -211,7 +211,6 @@ function checkRepeatEmail(email) {
         }
     });
 }
-
 /**
  *  通用回调结果集展示模态框
  * @param type   类型 1.警告框 2.错误框 3.成功框
@@ -234,4 +233,12 @@ function comResultMsg(type,msg,msgInfo) {
         $("#sMsgInfo").text(msgInfo);
         $("#successModel").modal("show");
     }
+}
+
+/**
+ *  关闭模态框
+ * @param type
+ */
+function closeModel(type){
+    $("#"+type+"").modal("hide");
 }
