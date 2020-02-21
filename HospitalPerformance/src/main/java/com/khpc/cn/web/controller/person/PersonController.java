@@ -27,4 +27,23 @@ public class PersonController {
         logger.info((new Date()).toString()+"一般用户首页");
         return "person/personIndex";
     }
+
+
+    /*********************************  辅助方法：页面布局路径 *********************************/
+
+    /**
+     *   左边功能列
+     */
+    @RequestMapping("/skipNav")
+    public String skipNav(){
+        return "/person/nav";
+    }
+
+    /**
+     *   选中页1
+     */
+    @RequestMapping("/skiIndex")
+    public String skiIndex(){
+        return "/person/index";
+    }
 }
