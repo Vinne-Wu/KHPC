@@ -1,10 +1,46 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <title>Title</title>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>公立医院绩效考核系统</title>
+    <link rel="stylesheet" href="/static/css/dmaku.css">
+    <link rel="stylesheet" href="/static/css/dmaku.min.css">
+    <script src="/static/js/modernizr.js"></script>
+    <link rel="shortcut icon" href="/static/assets/ico/favicon.png">
+    <link rel="apple-touch-icon-precomposed" sizes="144x144" href="/static/assets/ico/apple-touch-icon-144-precomposed.png">
+    <link rel="apple-touch-icon-precomposed" sizes="114x114" href="/static/assets/ico/apple-touch-icon-114-precomposed.png">
+    <link rel="apple-touch-icon-precomposed" sizes="72x72" href="/static/assets/ico/apple-touch-icon-72-precomposed.png">
+    <link rel="apple-touch-icon-precomposed" href="/static/assets/ico/apple-touch-icon-57-precomposed.png">
+    <script src="/static/assets/js/jquery-1.11.1.min.js"></script>
 </head>
+
 <body>
-   404
+<div class="wrap">
+    <div class="notFound ovf" style="margin:70px 0 80px 0;">
+        <img src="/static/images/404.png" alt="404" class="fl" style="margin-right:50px;">
+        <div class="fl" style="font-size:16px;color:#999;line-height:30px;margin-top:80px;">
+            <h3 style="color:#54c1c9;font-size:32px;">抱歉，您访问的页面暂时无法找到</h3>
+            <p style="margin-top:30px;">检查输入的地址是否正确</p>
+            <p >该页面可能已经删除、更名</p>
+            <hr style="border-top:1px solid #e6e6e6; margin: 30px 0;">
+            <h6 style="color:#333;font-size:20px;font-weight:normal;">将在<span class="djs" style="color:#fa6942;">5</span>秒后自动返回首页,请稍候...</h6>
+            <p style="font-size:16px; color:#666;">如果没有请<a href="/common/login" title="代码库" style="color:#54c1c9;">点击手动跳转</a></p>
+        </div>
+    </div>
+</div>
+<script type="text/javascript">
+    var djsObj = $('.djs');
+    var nowNum = djsObj.text();
+    var stimer = setInterval(function(){
+        nowNum--;
+        djsObj.text(nowNum);
+        if(nowNum==0){
+            clearInterval(stimer);
+            window.location.href = '/common/login';
+        }
+    },1000);
+</script>
 </body>
 </html>
