@@ -1,6 +1,5 @@
 package com.khpc.cn.web.controller.admin;
 
-import com.khpc.cn.web.controller.person.PersonController;
 import org.apache.log4j.Logger;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -25,6 +24,98 @@ public class AdminController {
     @RequestMapping(value = "/adminIndex")
     public String adminIndex(){
         logger.info((new Date()).toString()+"管理员首页");
-        return "";
+        return "admin/adminIndex";
+    }
+
+    /*********************************  辅助方法：页面布局路径 *********************************/
+
+    /**
+     *   左侧功能区模块页面
+     */
+    @RequestMapping("/skipNav")
+    public String skipNav(){
+        return "/admin/nav";
+    }
+
+    /*************************************  具体跳转页面  *************************************/
+    /**
+     *   首页模板页面
+     */
+    @RequestMapping("/skipIndex")
+    public String skipIndex(){
+        return "/admin/index";
+    }
+
+    /**
+     *   表单模板页面
+     */
+    @RequestMapping("/skipForm")
+    public String skipForm(){
+        return "/admin/form";
+    }
+
+    /**
+     *   表格模板页面
+     */
+    @RequestMapping("/skipTable")
+    public String skipTable(){
+        return "/admin/table";
+    }
+
+    /**
+     * 个人信息页面
+     */
+    @RequestMapping("/skipUserInfo")
+    public String skipUserInfo(){
+        return "admin/userInfos";
+    }
+
+    /**
+     *   修改密码页面
+     */
+    @RequestMapping("/skipPsd")
+    public String skipPsd(){
+        return "/register/modifyPsd";
+    }
+
+    /**
+     *   指标方案页面
+     */
+    @RequestMapping("/skipAccount")
+    public String skipAccount(){
+        return "/admin/accountInfo";
+    }
+
+
+    /**
+     *   考核方案审核
+     */
+    @RequestMapping("/skipExmPlan")
+    public String skipExmPlan(){
+        return "/admin/examPlan";
+    }
+    /**
+     *   公共参数设置
+     */
+    @RequestMapping("/skipCommParas")
+    public String skipCommParas(){
+        return "/admin/comParas";
+    }
+
+
+    /**
+     *  奖金分配
+     */
+    @RequestMapping("/skipBoa")
+    public String skipBoa(){
+        return "/admin/bonusAssgin";
+    }
+
+    /**
+     *  数据统计
+     */
+    @RequestMapping("/skipDas")
+    public String skipDas(){
+        return "/admin/dataStatistics";
     }
 }

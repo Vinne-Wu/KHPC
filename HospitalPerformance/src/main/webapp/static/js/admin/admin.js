@@ -41,8 +41,8 @@ function getUerInfo() {
                 $("#userName").text(user.name);
 
                 // 系统备用字段设置（日后完善）
-                $("#msgNum").text(1);
-                $("#optMsgNum").text("("+1+")");
+                $("#msgNum").text(3);
+                $("#optMsgNum").text("("+3+")");
             }
         },
         error: function() {
