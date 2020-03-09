@@ -36,6 +36,84 @@ public class User implements Serializable {
      */
     private String role;
 
+    /**
+     * 工作时间
+     */
+    private String workTime;
+
+    /**
+     * 学历
+     */
+    private String education;
+
+    /**
+     *  职称
+     */
+    private String academicTitle;
+
+    /**
+     *  员工编码
+     */
+    private String identityCode;
+
+    /**
+     *  岗位
+     */
+    private String workPost;
+
+    /**
+     *  账户状态   1：正常启用 0：待激活 -1：停用
+     */
+    private String state;
+
+    public String getWorkTime() {
+        return workTime;
+    }
+
+    public void setWorkTime(String workTime) {
+        this.workTime = workTime;
+    }
+
+    public String getEducation() {
+        return education;
+    }
+
+    public void setEducation(String education) {
+        this.education = education;
+    }
+
+    public String getAcademicTitle() {
+        return academicTitle;
+    }
+
+    public void setAcademicTitle(String academicTitle) {
+        this.academicTitle = academicTitle;
+    }
+
+    public String getIdentityCode() {
+        return identityCode;
+    }
+
+    public void setIdentityCode(String identityCode) {
+        this.identityCode = identityCode;
+    }
+
+    public String getWorkPost() {
+        return workPost;
+    }
+
+    public void setWorkPost(String workPost) {
+        this.workPost = workPost;
+    }
+
+    public String getState() {
+        return state;
+    }
+
+    public void setState(String state) {
+        this.state = state;
+    }
+
     public String getName() {
         return name;
     }

@@ -30,6 +30,6 @@ public class RegisterController {
     @RequestMapping(value = "/registerIndex")
     public String registerIndex(){
         logger.info((new Date()).toString()+"注册员首页");
-        return "register/registerIndex";
+        return "";
     }
 }

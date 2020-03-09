@@ -1,0 +1,269 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <meta http-equiv="X-UA-Compatible" content="IE=emulateIE7" />
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <link rel="stylesheet" type="text/css" href="/static/iform/css/style.css" />
+    <link rel="stylesheet" type="text/css" href="/static/iform/css/WdatePicker.css" />
+    <link rel="stylesheet" type="text/css" href="/static/iform/css/skin_/form.css" />
+    <link href="/static/iform/umeditor/themes/default/_css/umeditor.css" type="text/css" rel="stylesheet">
+    <script type="text/javascript" src="/static/iform/js/jquery.js"></script>
+    <script type="text/javascript" src="/static/iform/js/global.js"></script>
+    <script type="text/javascript" src="/static/iform/js/jquery.select.js"></script>
+    <script type="text/javascript" src="/static/iform/js/WdatePicker.js"></script>
+    <script type="text/javascript">
+        window.UMEDITOR_HOME_URL = 'umeditor/';  // 请换成绝对路径
+    </script>
+    <script type="text/javascript" src="/static/iform/js/umeditor.config.js"></script>
+    <script type="text/javascript" src="/static/iform/js/editor_api.js"></script>
+    <script type="text/javascript" src="/static/iform/umeditor/lang/zh-cn/zh-cn.js"></script>
+    <script  type="text/javascript" src="/static/js/highcharts.js"></script>
+</head>
+
+<body>
+<div id="container">
+    <div id="hd">
+    </div>
+    <div id="bd">
+        <div id="main">
+            <h2 class="subfild">
+                <span style="width: 175px">绩效工作量统计</span>
+            </h2>
+            <div class="subfild-content base-info">
+                <div  id="jxZxt" style="width: 550px; height: 280px;float: left;"></div>
+
+                <div  id="jxZxt2" style="width: 550px; height: 280px;position: relative;left:20%;" ></div>
+            </div>
+
+            <h2 class="subfild">
+                <span style="width: 175px">绩效奖金数统计</span>
+            </h2>
+            <div class="subfild-content remarkes-info">
+                <div  id="jjZxt" style="width: 550px; height: 280px;float: left;"></div>
+
+                <div  id="jjBzt" style="width: 550px; height: 280px;position: relative;left:20%;" ></div>
+            </div>
+        </div>
+    </div>
+</div>
+</body>
+
+<script type="text/javascript">
+    // 初始化
+    $(document).ready(function() {
+        jxZxtChart();
+        jxZxt2Chart();
+        jjZxtChart();
+        jjBztChart();
+    });
+
+    //绩效工作量折线图
+    function jxZxtChart(){
+        var title = {
+            text: ''
+        };
+
+        var xAxis = {
+            categories: ['1月', '2月', '3月', '4月', '5月', '6月',
+                '7月', '8月', '9月', '10月', '11月', '12月']
+        };
+        var yAxis = {
+            title: {
+                text: '绩效工作量标量值'
+            },
+            plotLines: [{
+                value: 0,
+                width: 1,
+                color: '#808080'
+            }]
+        };
+
+        var tooltip = {
+            valueSuffix: '标量'
+        }
+
+        var legend = {
+            layout: 'vertical',
+            align: 'right',
+            verticalAlign: 'middle',
+            borderWidth: 0
+        };
+
+        var series =  [
+            {
+                name:"绩效工作量",
+                data: [14200, 15975, 0, 0, 0, 0, 0,
+                    0, 0, 0, 0,0]
+            }
+        ];
+
+        var json = {};
+
+        json.title = title;
+        json.xAxis = xAxis;
+        json.yAxis = yAxis;
+        json.tooltip = tooltip;
+        json.legend = legend;
+        json.series = series;
+
+        $('#jxZxt').highcharts(json);
+    }
+
+    //绩效工作量柱形图
+    function jxZxt2Chart() {
+        var chart = {
+            type: 'column'
+        };
+        var title = {
+            text: ''
+        };
+        var subtitle = {
+            text: ''
+        };
+        var xAxis = {
+            categories: ['1月', '2月', '3月', '4月', '5月', '6月',
+                '7月', '8月', '9月', '10月', '11月', '12月']
+        };
+        var yAxis = {
+            min: 0,
+            title: {
+                text: '绩效工作量占比 (%)'
+            }
+        };
+        var tooltip = {
+            headerFormat: '<span style="font-size:10px">{point.key}</span><table>',
+            pointFormat: '{point.name}: {point.y:.1f} %',
+            footerFormat: '</table>',
+            shared: true,
+            useHTML: true
+        };
+        var plotOptions = {
+            column: {
+                pointPadding: 0.2,
+                borderWidth: 0
+            }
+        };
+        var credits = {
+            enabled: false
+        };
+
+        var series= [{
+            name: '个人绩效工作量占比',
+            data: [1.0, 12.5, 0, 0, 0, 0, 0, 0, 0,0, 0, 0]
+        }];
+
+        var json = {};
+        json.chart = chart;
+        json.title = title;
+        json.subtitle = subtitle;
+        json.tooltip = tooltip;
+        json.xAxis = xAxis;
+        json.yAxis = yAxis;
+        json.series = series;
+        json.plotOptions = plotOptions;
+        json.credits = credits;
+        $('#jxZxt2').highcharts(json);
+    }
+
+    //奖金折线图
+    function jjZxtChart() {
+        var title = {
+            text: ''
+        };
+
+        var xAxis = {
+            categories: ['1月', '2月', '3月', '4月', '5月', '6月',
+                '7月', '8月', '9月', '10月', '11月', '12月']
+        };
+        var yAxis = {
+            title: {
+                text: '绩效奖金数（元）'
+            },
+            plotLines: [{
+                value: 0,
+                width: 1,
+                color: '#808080'
+            }]
+        };
+
+        var tooltip = {
+            valueSuffix: '元'
+        }
+
+        var legend = {
+            layout: 'vertical',
+            align: 'right',
+            verticalAlign: 'middle',
+            borderWidth: 0
+        };
+
+        var series =  [
+            {
+                name:"绩效奖金",
+                data: [9700, 10000, 0, 0, 0, 0, 0,
+                    0, 0, 0, 0,0]
+            }
+        ];
+
+        var json = {};
+
+        json.title = title;
+        json.xAxis = xAxis;
+        json.yAxis = yAxis;
+        json.tooltip = tooltip;
+        json.legend = legend;
+        json.series = series;
+
+        $('#jjZxt').highcharts(json);
+    }
+
+    //奖金饼状图
+    function jjBztChart() {
+        var chart = {
+            plotBackgroundColor: null,
+            plotBorderWidth: null,
+            plotShadow: false
+        };
+        var title = {
+            text: '个人分配奖金占比'
+        };
+        var tooltip = {
+            pointFormat: '{series.name}: <b>{point.percentage:.1f}%</b>'
+        };
+        var plotOptions = {
+            pie: {
+                allowPointSelect: true,
+                cursor: 'pointer',
+                dataLabels: {
+                    enabled: true,
+                    format: '<b>{point.name}%</b>: {point.percentage:.1f} %',
+                    style: {
+                        color: (Highcharts.theme && Highcharts.theme.contrastTextColor) || 'black'
+                    }
+                }
+            }
+        };
+        var series= [{
+            type: 'pie',
+            name: '奖金分配占比',
+            data: [
+                {
+                    name: '张三',
+                    y: 12.5,
+                    sliced: true,
+                    selected: true
+                },
+                ['剩余占比', 87.5]
+            ]
+        }];
+
+        var json = {};
+        json.chart = chart;
+        json.title = title;
+        json.tooltip = tooltip;
+        json.series = series;
+        json.plotOptions = plotOptions;
+        $('#jjBzt').highcharts(json);
+    }
+</script>
+</html>

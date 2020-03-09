@@ -26,6 +26,7 @@ public class RegisterServiceImpl implements RegisterService {
         user.setPassword(Md5SecurityUtil.EncoderByMd5(bo.getPassword(),"utf-8"));
         user.setPhoneNum(bo.getPhoneNum());
         user.setRole(bo.getRole());
+        user.setState("0");
         try {
             MongoCore.addOne(user,"user");
             return new JsonResult<>(MsgCode.SCCESS_CODE,"添加成功！",1);

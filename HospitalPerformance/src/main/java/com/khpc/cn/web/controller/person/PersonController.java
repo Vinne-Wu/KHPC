@@ -24,26 +24,83 @@ public class PersonController {
      */
     @RequestMapping(value = "/personIndex")
     public String personIndex(){
-        logger.info((new Date()).toString()+"一般用户首页");
+        logger.info((new Date()).toString()+"普通首页");
         return "person/personIndex";
     }
-
 
     /*********************************  辅助方法：页面布局路径 *********************************/
 
     /**
-     *   左边功能列
+     *   左侧功能区模块页面
      */
     @RequestMapping("/skipNav")
     public String skipNav(){
         return "/person/nav";
     }
 
+    /*************************************  具体跳转页面  *************************************/
     /**
-     *   选中页1
+     *   首页模板页面
      */
-    @RequestMapping("/skiIndex")
-    public String skiIndex(){
+    @RequestMapping("/skipIndex")
+    public String skipIndex(){
         return "/person/index";
     }
+
+    /**
+     *   表单模板页面
+     */
+    @RequestMapping("/skipForm")
+    public String skipForm(){
+        return "/person/form";
+    }
+
+    /**
+     *   表格模板页面
+     */
+    @RequestMapping("/skipTable")
+    public String skipTable(){
+        return "/person/table";
+    }
+
+    /**
+     * 个人信息页面
+     */
+    @RequestMapping("/skipUserInfo")
+    public String skipUserInfo(){
+        return "/person/userInfo";
+    }
+
+    /**
+     *   修改密码页面
+     */
+    @RequestMapping("/skipPsd")
+    public String skipPsd(){
+        return "/person/updatePsd";
+    }
+
+    /**
+     *   考核数据页面
+     */
+    @RequestMapping("/skipAsd")
+    public String skipAsd(){
+        return "/person/assessData";
+    }
+
+    /**
+     *   奖金分配页面
+     */
+    @RequestMapping("/skipBos")
+    public String skipBos(){
+        return "/person/bonusShares";
+    }
+
+    /**
+     *  数据统计页面
+     */
+    @RequestMapping("/skipDas")
+    public String skipDas(){
+        return "/person/dataStatistics";
+    }
+
 }

@@ -25,9 +25,7 @@ public class UnifiedExecptionResolver implements HandlerExceptionResolver {
         // 判断异常类型 假如为数据处理异常，则返回首页
         // shiro登录权限认证异常
         if(e instanceof UnknownAccountException){
-
             System.out.print("登录异常");
-
             return null;
         }
         else{

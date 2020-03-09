@@ -2,6 +2,7 @@ package com.khpc.cn.web.controller.common;
 
 import com.khpc.cn.core.entity.JsonResult;
 import com.khpc.cn.core.entity.MsgCode;
+import com.khpc.cn.core.exception.ActivationException;
 import com.khpc.cn.web.controller.register.RegisterController;
 import com.khpc.cn.web.model.bo.UserBo;
 import com.khpc.cn.web.model.pojo.User;
@@ -37,6 +38,11 @@ import java.util.Map;
 public class ComManagerController {
 
     private static Logger logger = Logger.getLogger(ComManagerController.class);
+
+    /**
+     *  账户激活码
+     */
+    static final String ACTIVECODE = "1";
 
     @Autowired
     private RegisterService registerService;
@@ -117,28 +123,49 @@ public class ComManagerController {
             // 获取当前用户信息
             final Map principal = (Map) subject.getPrincipal();
             User user = (User) principal.get("user");
+            // 查询当前用户是否激活
+            if(!ACTIVECODE.equals(user.getState())){
+                throw  new ActivationException("待激活或者停用！");
+            }
             resultMap.put("user",user);
         } catch (UnknownAccountException e) {
-            System.out.println(e.getMessage());
-            return new JsonResult<>(MsgCode.ERRRO_CODE,"账户不存在！",resultMap);
-        } catch (AuthenticationException e) {
+            return new JsonResult<>(MsgCode.ERRRO_CODE,"账户或者密码错误！",resultMap);
+        }catch (ActivationException e){
+            return new JsonResult<>(MsgCode.ERRRO_CODE,e.getMessage(),resultMap);
+        }
+        catch (AuthenticationException e) {
            return new JsonResult<>(MsgCode.ERRRO_CODE,"其他原因认证错误！",resultMap);
         }
         return new JsonResult<>(MsgCode.SCCESS_CODE,"认证成功！",resultMap);
     }
 
     /**
-     * 退出
+     * 退出登录
      * @return
      */
     @RequestMapping(value = "/logout", method = RequestMethod.GET)
-    public Object logout() {
+    @ResponseBody
+    public JsonResult<Integer> logout() {
         Subject subject = SecurityUtils.getSubject();
         //注销
         subject.logout();
-        return null;
+        return new JsonResult<>(MsgCode.SCCESS_CODE,"退出登录!",1);
     }
 
+    /**
+     * 获取登录用户信息
+     * @return
+     */
+    @RequestMapping(value = "/getUserInfo",method = RequestMethod.POST)
+    @ResponseBody
+    public JsonResult<User> getUserInfo(){
+        // 登录用户主体
+        Subject subject = SecurityUtils.getSubject();
+        // 获取当前用户信息
+        Map principal = (Map) subject.getPrincipal();
+        User user = (User) principal.get("user");
+        return new JsonResult<>(MsgCode.SCCESS_CODE,"获取对象信息成功！",user);
+    }
 
     /**
      * 权限认证错误跳转页

@@ -49,11 +49,11 @@ function login() {
                 let role = data.result.user.role;
                 returnPageByRole(role);
             }else{
-                comResultMsg("2","失败！","账号或者密码错误！");
+                comResultMsg("2","失败！",data.message);
             }
         },
         error: function() {
-            alert("数据异常！");
+            comResultMsg("3","系统异常！",data.message);
         }
     });
 }
@@ -80,7 +80,6 @@ function returnPageByRole(role) {
 function registerPagep() {
     window.location.href = "/common/registerPage";
 }
-
 
 /**
  * 注册用户，注册成功跳转到登录页面

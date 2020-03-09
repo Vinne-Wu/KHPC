@@ -1,0 +1,281 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <meta http-equiv="X-UA-Compatible" content="IE=emulateIE7" />
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <link rel="stylesheet" type="text/css" href="/static/iform/css/style.css" />
+    <link rel="stylesheet" type="text/css" href="/static/iform/css/WdatePicker.css" />
+    <link rel="stylesheet" type="text/css" href="/static/iform/css/skin_/table.css" />
+    <link rel="stylesheet" type="text/css" href="/static/iform/css/jquery.grid.css" />
+</head>
+
+<body>
+<div id="container">
+    <div id="hd"></div>
+    <div id="bd">
+        <div id="main">
+            <div class="search-box ue-clear">
+                <div class="search-area">
+                    <div class="kv-item ue-clear">
+                        <div class="kv-item ue-clear">
+                            <span class="choose">
+                                <label>考核年份:</label>
+                                <div class="kv-item-content">
+                                    <select>
+                                        <option>2019年</option>
+                                        <option selected="selected">2020年</option>
+                                        <option>2021年</option>
+                                    </select>
+                                </div>
+                            </span>
+
+                            <span  class="choose" id="khyf">
+                                <label>考核月份:</label>
+                                <div class="kv-item-content">
+                                    <select id="khyfs">
+                                        <option value=1>1月</option>
+                                        <option value=2>2月</option>
+                                        <option selected="selected" value=3>3月</option>
+                                        <option value=4>4月</option>
+                                        <option value=5>5月</option>
+                                        <option value=6>6月</option>
+                                        <option value=7>7月</option>
+                                        <option value=8>8月</option>
+                                        <option value=9>9月</option>
+                                        <option value=10>10月</option>
+                                        <option value=11>11月</option>
+                                        <option value=12>12月</option>
+                                    </select>
+                                </div>
+                            </span>
+
+                            <span  class="choose" style="display: none;" id="khrq">
+                                <label>考核日期:</label>
+                                <div class="kv-item-content">
+                                    <select id="khrqs">
+                                        <option value=9>9</option>
+                                    </select>
+                                </div>
+                            </span>
+
+                            <span  class="choose">
+                                <label>考核频率:</label>
+                                <div class="kv-item-content">
+                                    <select onchange="chooseKHPL()" id="khpl">
+                                        <option value="year">年</option>
+                                        <option selected="selected" value="month">月</option>
+                                        <option value="day">日</option>
+                                    </select>
+                                </div>
+                            </span>
+                        </div>
+                    </div>
+
+<!--                    <div class="kv-item ue-clear">-->
+<!--                        <label>选择类型:</label>-->
+<!--                        <div class="kv-item-content">-->
+<!--                            <select>-->
+<!--                                <option>全部</option>-->
+<!--                                <option>全部</option>-->
+<!--                                <option>全部</option>-->
+<!--                            </select>-->
+<!--                        </div>-->
+<!--                    </div>-->
+                </div>
+                <div class="search-button">
+                    <input class="button" type="button" value="搜索一下" />
+                </div>
+            </div>
+
+            <div class="table">
+                <div class="opt ue-clear">
+                	<span class="sortarea">
+                    	<span class="sort">
+                        	<label>排序：</label>
+                            <span class="name">
+                            	<i class="icon"></i>
+                                <span class="text">名称</span>
+                            </span>
+                        </span>
+
+                        <i class="list"></i>
+                        <i class="card"></i>
+                    </span>
+                    <span class="optarea">
+                        <a href="javascript:;" class="add">
+                            <i class="icon"></i>
+                            <span class="text">添加</span>
+                        </a>
+                        <a href="javascript:;" class="delete">
+                            <i class="icon"></i>
+                            <span class="text">删除</span>
+                        </a>
+
+                        <a href="javascript:;" class="statistics">
+                            <i class="icon"></i>
+                            <span class="text">统计</span>
+                        </a>
+
+                        <a href="javascript:;" class="config">
+                            <i class="icon"></i>
+                            <span class="text">配置</span>
+                        </a>
+                    </span>
+                </div>
+
+                <div class="grid"></div>
+
+                <div class="pagination"></div>
+            </div>
+        </div>
+    </div>
+</div>
+</body>
+<script type="text/javascript" src="/static/iform/js/jquery.js"></script>
+<script type="text/javascript" src="/static/iform/js/global.js"></script>
+<script type="text/javascript" src="/static/iform/js/jquery.select.js"></script>
+<script type="text/javascript" src="/static/iform/js/core.js"></script>
+<script type="text/javascript" src="/static/iform/js/jquery.pagination.js"></script>
+<script type="text/javascript" src="/static/iform/js/jquery.grid.js"></script>
+<script type="text/javascript" src="/static/iform/js/WdatePicker.js"></script>
+<script type="text/javascript">
+    $('select').select();
+    var head = [{
+        label: '科室名称',
+        width: 120,
+        name: 'ks'
+    },{
+        label: '指标编码',
+        width: 120,
+        sortable: 'default',
+        name: 'id'
+    },{
+        label:'指标名称',
+        width: 350,
+        name:'name'
+    },{
+        label:'标化系数',
+        width:150
+    },{
+        label: '标化工作量',
+        width: 150
+    },{
+        label: '服务次数',
+        width: 150
+    },{
+        label: '绩效工作量',
+        sortable: 'default',
+        width: 150
+    },{
+        label: '考核日期',
+        width: 150
+    },{
+        label: '是否审核',
+        width:150
+    }];
+
+    var oper = [{label:'申诉',onclick:function(){
+            alert('删除');
+        }},{label:'详情',onclick: function(){
+            alert('编辑')
+        }}]
+    var tbody = [
+        ["护理科","N01001","护理记录单","1","1","12",12,"2020-2-15","已审核",oper],
+        ["护理科","N01002","晨间护理","2","2","4",8,"2020-2-15","已审核",oper],
+        ["护理科","N01003","幼儿身体清洁","3","3","7",21,"2020-2-15","已审核",oper],
+        ["护理科","N01004","健康指导","2","2","3",6,"2020-2-15","已审核",oper],
+        ["护理科","N01005","夜班","15","15","4",60,"2020-2-15","已审核",oper],
+        ["护理科","N01006","病人六洁","8","6","2",16,"2020-2-15","已审核",oper],
+        ["护理科","N01007","病房环境","4","4","8",32,"2020-2-15","已审核",oper],
+        ["护理科","N01008","入院教育","3","3","8",24,"2020-2-15","已审核",oper],
+        ["护理科","N01009","出院教育","3","3","10",30,"2020-2-15","已审核",oper],
+        ["护理科","N010010","健康指导","4","4","2",16,"2020-2-15","已审核",oper],
+        ["护理科","N010011","基础操作","10","10","17",170,"2020-2-15","已审核",oper],
+        ["护理科","N010012","辅班","10","10","18",180,"2020-2-15","已审核",oper],
+        ["护理科","N010013","主班","20","20","8",160,"2020-2-15","已审核",oper]
+       ]
+
+
+    $('.grid').Grid({
+        thead: head,
+        tbody: null,
+        height:400,
+        checkbox: {
+            single:true
+        },
+        operator: {
+            type : "normal",
+            width : 100
+        },
+        sortCallBack : function(name,index,type){
+            alert(name+","+index+','+type);
+        }
+
+    });
+
+    $('.grid').Grid('addLoading');
+
+    /// 模拟异步
+    setTimeout(function(){
+        $('.grid').Grid('setData',tbody, head);
+    },2000)
+
+
+    $('.pagination').pagination(100,{
+        callback: function(page){
+            alert(page);
+        },
+        display_msg: false
+    });
+
+    $('.search-box input[type=radio]').click(function(e) {
+        if($(this).prop('checked')){
+            if($(this).attr('data-define') === 'define'){
+                $('.define-input').show();
+            }else{
+                $('.define-input').hide();
+            }
+        }
+    });
+
+    /**
+     *  切换考核频率
+     */
+    function chooseKHPL() {
+        let khpl = $("#khpl").val();
+        if(khpl == "year"){
+            $("#khyf").css("display","none");
+            $("#khrq").css("display","none");
+        }
+        if(khpl == "month"){
+            $("#khyf").css("display","");
+        }
+        if(khpl == "day"){
+            $("#khyf").css("display","");
+            loadDays();
+        }
+    }
+
+    /**
+     * 加载考核日期
+     */
+    function loadDays() {
+        let curDate = new Date();
+        let day = curDate.getDate();
+        let curMonth = $("#khyfs").val();
+        curDate.setMonth(curMonth);
+        curDate.setDate(0);
+        //加载数据
+        $("#khrqs").empty();
+        for (let i=1;i<=curDate.getDate();i++){
+             if (i == day){
+                 $("#khrqs").append("<option value="+i+" selected='selected'>"+i+"</option>");
+             }else{
+                 $("#khrqs").append("<option value="+i+" >"+i+"</option>");
+             }
+        }
+        // 展示
+        $("#khrq").css("display","");
+    }
+</script>
+</html>

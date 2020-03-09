@@ -25,6 +25,6 @@ public class AdminController {
     @RequestMapping(value = "/adminIndex")
     public String adminIndex(){
         logger.info((new Date()).toString()+"管理员首页");
-        return "admin/adminIndex";
+        return "";
     }
 }
