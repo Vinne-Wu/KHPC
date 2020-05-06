@@ -102,7 +102,36 @@
                     </span>
                 </div>
 
-                <div class="grid"></div>
+                <div>
+                    <table class="table table-bordered table-hover">
+                        <thead style="background-color:#f6f6f6">
+                        <tr>
+                            <th>编号</th>
+                            <th>用户邮箱</th>
+                            <th>用户</th>
+                            <th>年龄</th>
+                            <th>性别</th>
+                            <th>联系方式</th>
+                            <th>申请日期</th>
+                            <th>激活状态</th>
+                            <th>操作</th>
+                        </tr>
+                        </thead>
+                        <tbody>
+                        <tr>
+                            <td>1</td>
+                            <td>user@qq.com</td>
+                            <td>张三</td>
+                            <td>25</td>
+                            <td>男</td>
+                            <td>18375331668</td>
+                            <td>2020-05-06</td>
+                            <td>待激活</td>
+                            <td><a href="#">停用</a>&nbsp;&nbsp;&nbsp;&nbsp;<a href="#">编辑</a></td>
+                        </tr>
+                        </tbody>
+                    </table>
+                </div>
 
                 <div class="pagination"></div>
             </div>
@@ -270,83 +299,12 @@
 <script type="text/javascript">
     //表单数据
     $('select').select();
-    var head =
-        [{
-            label: '用户邮箱',
-            width:180
-        },{
-            label: '用户名',
-            width: 120,
-        },{
-            label: '年龄',
-            width: 120
-        },{
-            label: '性别',
-            width: 120
-        },{
-            label: '联系方式',
-            width: 120
-        },{
-            label:'申请日期',
-            width: 200
-        },{
-            label: '激活状态',
-            width: 120
-        }];
-
-    var oper1 = [{label:'停用',onclick:function(){
-            alert('停用');
-        }},{label:'编辑',onclick: function(){
-            alert('编辑')
-        }}]
-
-    var oper2 = [{label:'详情',onclick:function(){
-            alert('详情');
-        }},{label:'-',onclick: function(){
-            alert('-')
-        }}]
-
-    var oper3 = [{label:'启用',onclick:function(){
-            alert('启用');
-        }},{label:'删除',onclick: function(){
-            alert('删除')
-        }}]
-
-
-    var tbody = [
-        ["user@qq.com","张三","25","男","12345678900","2020-03-01","已激活",oper1] ,
-        ["register@qq.com","李四","25","男","12345678900","2020-03-01","已激活",oper1] ,
-        ["130@qq.com","关羽","25","男","12345678902","2020-03-09","待激活",oper2] ,
-        ["140@qq.com","孙权","42","男","12345678903","2020-03-09","待激活",oper2] ,
-        ["150@qq.com","孙策","45","男","12345678904","2020-03-09","待激活",oper2] ,
-        ["160@qq.com","曹操","65","男","12345678905","2020-03-09","已停用",oper3]
-    ]
-
-
-    $('.grid').Grid({
-        thead: head,
-        tbody: null,
-        height:400,
-        checkbox: {
-            single:true
-        },
-        operator: {
-            type : "normal",
-            width : 100
-        },
-        sortCallBack : function(name,index,type){
-            alert(name+","+index+','+type);
-        }
-
-    });
-
-    $('.grid').Grid('addLoading');
-
+    var head = [];
+    var tbody = []
     /// 模拟异步
     setTimeout(function(){
         $('.grid').Grid('setData',tbody, head);
-    },2000)
-
+    },2000);
 
     $('.pagination').pagination(100,{
         callback: function(page){

@@ -111,7 +111,7 @@
 </div>
 
 <!-- 新增指标弹出框 start -->
-<div class="modal fade" id="addModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+<div style="display: none" class="modal fade" id="addModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
     <div class="modal-dialog">
         <div class="modal-content">
             <div class="modal-header">
@@ -188,7 +188,7 @@
 <!-- 新增指标弹出框 end -->
 
 <!-- 新增指标弹出框 start -->
-<div class="modal fade" id="delModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+<div style="display: none" class="modal fade" id="delModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
     <div class="modal-dialog">
         <div class="modal-content">
             <div class="modal-header">
@@ -277,7 +277,7 @@
         width:150
     }];
 
-    var oper = [{label:'申诉',onclick:function(){
+    var oper = [{label:'删除',onclick:function(){
             alert('删除');
         }},{label:'详情',onclick: function(){
             alert('编辑')
