@@ -1,10 +1,15 @@
 package com.khpc.cn.web.controller.admin;
 
+import com.khpc.cn.core.entity.JsonResult;
+import com.khpc.cn.web.service.AdminService;
 import org.apache.log4j.Logger;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.ResponseBody;
 
 import java.util.Date;
+import java.util.Map;
 
 /**
  * @author Vinne
@@ -16,6 +21,9 @@ import java.util.Date;
 public class AdminController {
 
     private static Logger logger = Logger.getLogger(AdminController.class);
+
+    @Autowired
+    private AdminService adminService;
 
     /**
      * 管理员首页
@@ -117,5 +125,12 @@ public class AdminController {
     @RequestMapping("/skipDas")
     public String skipDas(){
         return "/admin/dataStatistics";
+    }
+
+    /*************************************  数据处理模块  *************************************/
+    @RequestMapping("/getAccountInfo")
+    @ResponseBody
+    public JsonResult<Map<String,Object>> getAccountInfo(){
+        return adminService.getAccountInfo();
     }
 }

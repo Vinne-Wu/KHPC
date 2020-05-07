@@ -1,6 +1,7 @@
 package com.khpc.cn.web.model.pojo;
 
 import java.io.Serializable;
+import java.util.Date;
 
 /**
  * @author Vinne
@@ -65,6 +66,11 @@ public class User implements Serializable {
      *  账户状态   1：正常启用 0：待激活 -1：停用
      */
     private String state;
+
+    /**
+     *  账户更新时间
+     */
+    private Date updateTime;
 
     public String getWorkTime() {
         return workTime;
@@ -152,5 +158,13 @@ public class User implements Serializable {
 
     public void setRole(String role) {
         this.role = role;
+    }
+
+    public Date getUpdateTime() {
+        return updateTime;
+    }
+
+    public void setUpdateTime(Date updateTime) {
+        this.updateTime = updateTime;
     }
 }
