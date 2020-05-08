@@ -1,10 +1,16 @@
 package com.khpc.cn.web.controller.admin;
 
+import com.khpc.cn.core.entity.JsonResult;
+import com.khpc.cn.web.service.AdminService;
 import org.apache.log4j.Logger;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.ResponseBody;
 
+import javax.servlet.http.HttpServletRequest;
 import java.util.Date;
+import java.util.Map;
 
 /**
  * @author Vinne
@@ -16,6 +22,9 @@ import java.util.Date;
 public class AdminController {
 
     private static Logger logger = Logger.getLogger(AdminController.class);
+
+    @Autowired
+    private AdminService adminService;
 
     /**
      * 管理员首页
@@ -118,4 +127,36 @@ public class AdminController {
     public String skipDas(){
         return "/admin/dataStatistics";
     }
+
+    /*************************************  数据处理模块  *************************************/
+    /**
+     *  查询所有账户信息（管理员除外）
+     * @return
+     */
+    @RequestMapping("/getAccountInfo")
+    @ResponseBody
+    public JsonResult<Map<String,Object>> getAccountInfo(){
+        return adminService.getAccountInfo();
+    }
+
+    @RequestMapping("/searchUser")
+    @ResponseBody
+    public JsonResult<Map<String,Object>> searchUser(String searchName){
+        return  adminService.searchUserByName(searchName);
+    }
+
+    /**
+     *  激活用户
+     * @param request
+     * @return
+     */
+    @RequestMapping(value = "/activeUser")
+    @ResponseBody
+    public JsonResult<Map<String,Object>> activeUser(HttpServletRequest request){
+
+        String remail =request.getParameter("email");
+
+        return null;
+    }
+
 }

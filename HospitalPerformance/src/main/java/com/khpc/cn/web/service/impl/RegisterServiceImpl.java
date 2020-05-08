@@ -10,6 +10,8 @@ import com.khpc.cn.web.service.RegisterService;
 import org.springframework.data.mongodb.core.query.Criteria;
 import org.springframework.stereotype.Service;
 
+import java.util.Date;
+
 /**
  * @author Vinne
  * @date 2020/1/20 16:10
@@ -27,6 +29,7 @@ public class RegisterServiceImpl implements RegisterService {
         user.setPhoneNum(bo.getPhoneNum());
         user.setRole(bo.getRole());
         user.setState("0");
+        user.setUpdateTime(new Date());
         try {
             MongoCore.addOne(user,"user");
             return new JsonResult<>(MsgCode.SCCESS_CODE,"添加成功！",1);

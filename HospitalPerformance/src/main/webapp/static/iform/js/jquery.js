@@ -1470,7 +1470,7 @@ jQuery.support = (function() {
 	} catch( e ) {
 		support.deleteExpando = false;
 	}
-	var onclicktmp = null; 
+	var onclicktmp = null;
 	if ( !div.addEventListener && div.attachEvent && div.fireEvent ) {
 		div.attachEvent( "onclick", onclicktmp = function() {
 			// Cloning a node shouldn't copy over any
@@ -3646,7 +3646,7 @@ if ( !jQuery.support.submitBubbles ) {
 			});
 			// return undefined since we don't need an event listener
 		},
-		
+
 		postDispatch: function( event ) {
 			// If form was submitted by the user, bubble the event up the tree
 			if ( event._submit_bubble ) {

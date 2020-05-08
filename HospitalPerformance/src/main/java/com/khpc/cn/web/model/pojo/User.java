@@ -1,6 +1,7 @@
 package com.khpc.cn.web.model.pojo;
 
 import java.io.Serializable;
+import java.util.Date;
 
 /**
  * @author Vinne
@@ -42,7 +43,7 @@ public class User implements Serializable {
     private String workTime;
 
     /**
-     * 学历
+     * 学历  1.大专 2.本科 3.硕士
      */
     private String education;
 
@@ -62,9 +63,19 @@ public class User implements Serializable {
     private String workPost;
 
     /**
+     * 科室
+     */
+    private String department;
+
+    /**
      *  账户状态   1：正常启用 0：待激活 -1：停用
      */
     private String state;
+
+    /**
+     *  账户更新时间
+     */
+    private Date updateTime;
 
     public String getWorkTime() {
         return workTime;
@@ -152,5 +163,21 @@ public class User implements Serializable {
 
     public void setRole(String role) {
         this.role = role;
+    }
+
+    public Date getUpdateTime() {
+        return updateTime;
+    }
+
+    public void setUpdateTime(Date updateTime) {
+        this.updateTime = updateTime;
+    }
+
+    public String getDepartment() {
+        return department;
+    }
+
+    public void setDepartment(String department) {
+        this.department = department;
     }
 }

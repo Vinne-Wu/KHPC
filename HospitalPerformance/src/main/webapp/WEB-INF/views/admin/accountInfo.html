@@ -24,54 +24,14 @@
                             <span class="choose">
                                 <label>账号:</label>
                                 <div class="kv-item-content">
-                                    <input type="text" placeholder="请输入要查询的账号"  style="width: 85%"/>
-                                </div>
-                            </span>
-
-                            <span class="choose">
-                                <label>年份:</label>
-                                <div class="kv-item-content">
-                                    <select>
-                                        <option>2019年</option>
-                                        <option selected="selected">2020年</option>
-                                        <option>2021年</option>
-                                    </select>
-                                </div>
-                            </span>
-
-                            <span  class="choose" id="khyf">
-                                <label>月份:</label>
-                                <div class="kv-item-content">
-                                    <select id="khyfs">
-                                        <option value=1>1月</option>
-                                        <option value=2>2月</option>
-                                        <option selected="selected" value=3>3月</option>
-                                        <option value=4>4月</option>
-                                        <option value=5>5月</option>
-                                        <option value=6>6月</option>
-                                        <option value=7>7月</option>
-                                        <option value=8>8月</option>
-                                        <option value=9>9月</option>
-                                        <option value=10>10月</option>
-                                        <option value=11>11月</option>
-                                        <option value=12>12月</option>
-                                    </select>
-                                </div>
-                            </span>
-
-                            <span  class="choose" id="khrq">
-                                <label>考核日期:</label>
-                                <div class="kv-item-content">
-                                    <select id="khrqs">
-                                        <option value=9>9</option>
-                                    </select>
+                                    <input type="text" placeholder="请输入要查询的账号"  style="width: 85%;height: 30px;" class="form-control" id="userName"/>
                                 </div>
                             </span>
                         </div>
                     </div>
                 </div>
                 <div class="search-button">
-                    <input class="button" type="button" value="查询" />
+                    <input class="button" type="button" value="查询" onclick="searchUser()" />
                 </div>
             </div>
 
@@ -90,12 +50,12 @@
                         <i class="card"></i>
                     </span>
                     <span class="optarea">
-                        <a href="javascript:;" class="delete" data-toggle="modal" data-target="#delModal">
+                        <a href="javascript:;" class="delete" data-toggle="modal">
                             <i class="icon"></i>
                             <span class="text">删除</span>
                         </a>
 
-                        <a href="javascript:;" class="config" data-toggle="modal" data-target="#addModal">
+                        <a href="javascript:;" class="config" data-toggle="modal">
                             <i class="icon"></i>
                             <span class="text">详情</span>
                         </a>
@@ -108,7 +68,7 @@
                         <tr>
                             <th>编号</th>
                             <th>用户邮箱</th>
-                            <th>用户</th>
+                            <th>用户名</th>
                             <th>年龄</th>
                             <th>性别</th>
                             <th>联系方式</th>
@@ -117,18 +77,7 @@
                             <th>操作</th>
                         </tr>
                         </thead>
-                        <tbody>
-                        <tr>
-                            <td>1</td>
-                            <td>user@qq.com</td>
-                            <td>张三</td>
-                            <td>25</td>
-                            <td>男</td>
-                            <td>18375331668</td>
-                            <td>2020-05-06</td>
-                            <td>待激活</td>
-                            <td><a href="#">停用</a>&nbsp;&nbsp;&nbsp;&nbsp;<a href="#">编辑</a></td>
-                        </tr>
+                        <tbody id="tableData">
                         </tbody>
                     </table>
                 </div>
@@ -138,6 +87,8 @@
         </div>
     </div>
 </div>
+
+
 
 <!-- 用户新增弹出框 start -->
 <div style="display: none" class="modal fade" id="addModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
@@ -152,89 +103,111 @@
                 </h4>
             </div>
 
-            <div class="modal-body">
-                <div class="kv-item ue-clear">
-                    <label><span class="impInfo">*</span>邮箱</label>
-                    <div class="kv-item-content">
-                        <input type="text" placeholder="130@qq.com" disabled="disabled" />
+            <form id="dataForm">
+                <div class="modal-body">
+                    <div class="kv-item ue-clear">
+                        <label><span class="impInfo">*</span>用户角色</label>
+                        <div class="kv-item-content">
+                            <select id="role">
+                                <option value="register">考核员</option>
+                                <option value="person">普通用户</option>
+                            </select>
+                        </div>
                     </div>
-                </div>
 
-                <div class="kv-item ue-clear">
-                    <label><span class="impInfo">*</span>用户名</label>
-                    <div class="kv-item-content">
-                        <input type="text" placeholder="关羽" />
+                    <div class="kv-item ue-clear">
+                        <label><span class="impInfo">*</span>邮箱</label>
+                        <div class="kv-item-content">
+                            <input type="text" placeholder="xxx@xx.com" style="width: 397px;" name="email"/>
+                        </div>
+                    </div>
+
+                    <div class="kv-item ue-clear">
+                        <label><span class="impInfo">*</span>用户名</label>
+                        <div class="kv-item-content">
+                            <input type="text" style="width: 397px;" name="name"/>
+                        </div>
+                    </div>
+
+                    <div class="kv-item ue-clear">
+                        <label><span class="impInfo">*</span>年龄</label>
+                        <div class="kv-item-content">
+                            <input type="text" style="width: 397px;" name="age"/>
+                        </div>
+                    </div>
+
+                    <div class="kv-item ue-clear">
+                        <label><span class="impInfo">*</span>性别</label>
+                        <div class="kv-item-content">
+                            <select id="sex">
+                                <option value="男">男</option>
+                                <option value="女">女</option>
+                            </select>
+                        </div>
+                    </div>
+
+                    <div class="kv-item ue-clear">
+                        <label><span class="impInfo">*</span>联系方式</label>
+                        <div class="kv-item-content">
+                            <input type="text" placeholder="请输入规范号码" style="width: 397px;" name="phoneNum"/>
+                        </div>
+                    </div>
+
+                    <div class="kv-item ue-clear">
+                        <label><span class="impInfo">*</span>学历</label>
+                        <div class="kv-item-content">
+                            <select id="education">
+                                <option value="1">大专</option>
+                                <option value="2">本科</option>
+                                <option value="3">硕士</option>
+                            </select>
+                        </div>
+                    </div>
+
+                    <div class="kv-item ue-clear">
+                        <label><span class="impInfo">*</span>职称</label>
+                        <div class="kv-item-content">
+                            <select id="academicTitle">
+                                <option>初级</option>
+                                <option>中级</option>
+                                <option>高级</option>
+                            </select>
+                        </div>
+                    </div>
+
+                    <div class="kv-item ue-clear">
+                        <label><span class="impInfo">*</span>科室</label>
+                        <div class="kv-item-content">
+                            <select id="department">
+                                <option>护理科</option>
+                                <option>门诊科</option>
+                            </select>
+                        </div>
+                    </div>
+
+                    <div class="kv-item ue-clear">
+                        <label><span class="impInfo">*</span>岗位</label>
+                        <div class="kv-item-content">
+                            <select id="workPost">
+                                <option>护士</option>
+                                <option>医生</option>
+                            </select>
+                        </div>
+                    </div>
+
+                    <div class="kv-item ue-clear time">
+                        <label><span class="impInfo">*</span>工作时间</label>
+                        <div class="kv-item-content">
+                            <input type="text" onfocus="WdatePicker({dateFmt:'yyyy-MM-dd HH:mm:ss'})" style="width: 397px;" name="workTime"/>
+                        </div>
                     </div>
                 </div>
-                <div class="kv-item ue-clear">
-                    <label><span class="impInfo">*</span>年龄</label>
-                    <div class="kv-item-content">
-                        <input type="text" placeholder="25" />
-                    </div>
-                </div>
-                <div class="kv-item ue-clear">
-                    <label><span class="impInfo">*</span>性别</label>
-                    <div class="kv-item-content">
-                        <input type="text" placeholder="男" />
-                    </div>
-                </div>
-                <div class="kv-item ue-clear">
-                    <label><span class="impInfo">*</span>联系方式</label>
-                    <div class="kv-item-content">
-                        <input type="text" placeholder="12345678902" />
-                    </div>
-                </div>
-                <div class="kv-item ue-clear">
-                    <label><span class="impInfo">*</span>学历</label>
-                    <div class="kv-item-content">
-                        <select>
-                            <option>大专</option>
-                            <option>本科</option>
-                            <option>硕士</option>
-                        </select>
-                    </div>
-                </div>
-                <div class="kv-item ue-clear">
-                    <label><span class="impInfo">*</span>职称</label>
-                    <div class="kv-item-content">
-                        <select>
-                            <option>初级</option>
-                            <option>中级</option>
-                            <option>高级</option>
-                        </select>
-                    </div>
-                </div>
-                <div class="kv-item ue-clear">
-                    <label><span class="impInfo">*</span>科室</label>
-                    <div class="kv-item-content">
-                        <select>
-                            <option>护理科</option>
-                            <option>门诊科</option>
-                        </select>
-                    </div>
-                </div>
-                <div class="kv-item ue-clear">
-                    <label><span class="impInfo">*</span>岗位</label>
-                    <div class="kv-item-content">
-                        <select>
-                            <option>护士</option>
-                            <option>医生</option>
-                        </select>
-                    </div>
-                </div>
-                <div class="kv-item ue-clear time">
-                    <label><span class="impInfo">*</span>工作时间</label>
-                    <div class="kv-item-content">
-                        <input type="text" onfocus="WdatePicker({dateFmt:'yyyy-MM-dd HH:mm:ss'})" />
-                        <i class="time-icon"></i>
-                    </div>
-                </div>
-            </div>
+            </form>
 
             <div class="modal-footer">
                 <button type="button" class="btn btn-default" data-dismiss="modal">关闭
                 </button>
-                <button type="button" class="btn btn-primary">
+                <button type="button" class="btn btn-primary" onclick="activeUser()">
                     激活
                 </button>
             </div>
@@ -289,65 +262,170 @@
 <!-- 用户删除弹出框 end -->
 
 </body>
-<script type="text/javascript" src="/static/iform/js/jquery.js"></script>
-<script type="text/javascript" src="/static/iform/js/global.js"></script>
+<!--<script type="text/javascript" src="/static/iform/js/jquery.js"></script>-->
+<!--<script type="text/javascript" src="/static/iform/js/global.js"></script>-->
 <script type="text/javascript" src="/static/iform/js/jquery.select.js"></script>
 <script type="text/javascript" src="/static/iform/js/core.js"></script>
 <script type="text/javascript" src="/static/iform/js/jquery.pagination.js"></script>
 <script type="text/javascript" src="/static/iform/js/jquery.grid.js"></script>
 <script type="text/javascript" src="/static/iform/js/WdatePicker.js"></script>
 <script type="text/javascript">
-    //表单数据
-    $('select').select();
-    var head = [];
-    var tbody = []
-    /// 模拟异步
-    setTimeout(function(){
-        $('.grid').Grid('setData',tbody, head);
-    },2000);
-
-    $('.pagination').pagination(100,{
-        callback: function(page){
-            alert(page);
-        },
-        display_msg: false
-    });
-
-    $('.search-box input[type=radio]').click(function(e) {
-        if($(this).prop('checked')){
-            if($(this).attr('data-define') === 'define'){
-                $('.define-input').show();
-            }else{
-                $('.define-input').hide();
-            }
-        }
-    });
-
     /**
-     * 加载考核日期
+     * 初始化
      */
-    function loadDays() {
-        let curDate = new Date();
-        let day = curDate.getDate();
-        let curMonth = $("#khyfs").val();
-        curDate.setMonth(curMonth);
-        curDate.setDate(0);
-        //加载数据
-        $("#khrqs").empty();
-        for (let i=1;i<=curDate.getDate();i++){
-            if (i == day){
-                $("#khrqs").append("<option value="+i+" selected='selected'>"+i+"</option>");
-            }else{
-                $("#khrqs").append("<option value="+i+" >"+i+"</option>");
+    $(document).ready(function() {
+        getAccountInfo();
+    });
+
+    function searchUser() {
+        let userName = $("#userName").val();
+
+        $.ajax({
+            type: "POST",
+            url:"/admin/searchUser",
+            dataType:'json',
+            data:{
+                searchName : userName
+            },
+            async: true,  // 注：ajax 同步情况下会阻塞一些js效果，比如页面跳转等等，所有注意同异步使用
+            success: function(data) {
+                let userList  = data.result.list;
+                let tableData = $("#tableData");
+                let count = 0;
+                // 先清空表格内容
+                tableData.empty();
+                $.each(userList,function (index,item) {
+                    if(item.role != "admin"){
+                        //激活状态+操作按钮
+                        let state = '待激活';
+                        let operate = '<td><a href="#" onclick=stopButton()>停用</a>&nbsp;&nbsp;&nbsp;&nbsp;<a href="#" onclick=editButton()>编辑</a></td>';
+                        if(item.state == '1'){
+                            state = '已激活';
+                            operate = '<td><a href="#" onclick=stopButton()>停用</a>&nbsp;&nbsp;&nbsp;&nbsp;<a href="#" onclick=editButton()>编辑</a></td>';
+                        }else if(item.state == '-1'){
+                            state = '停用';
+                            operate = '<td><a href="#" onclick=startButton()>启用</a>&nbsp;&nbsp;&nbsp;&nbsp;<a href="#" onclick=editButton()>编辑</a></td>';
+                        }
+                        // 时间格式转换
+                        let date = new Date(item.updateTime);
+
+                        tableData.append('          <tr>\n' +
+                            '                            <td>'+(index+1-count)+'</td>\n' +
+                            '                            <td>'+item.email+'</td>\n' +
+                            '                            <td>'+item.name+'</td>\n' +
+                            '                            <td>*</td>\n' +
+                            '                            <td>*</td>\n' +
+                            '                            <td>'+item.phoneNum+'</td>\n' +
+                            '                            <td>'+date.toLocaleDateString()+'</td>\n' +
+                            '                            <td>'+state+'</td>\n' +
+                            operate +
+                            '                        </tr>');
+                    }else{
+                        count++;
+                    }
+                });
+            },
+            error: function() {
+                alert("数据异常！");
             }
-        }
-        // 展示
-        $("#khrq").css("display","");
+        });
+        
+    }
+    
+    /**
+     *  获取注册账户信息
+     */
+    function getAccountInfo() {
+        $.ajax({
+            type: "POST",
+            url:"/admin/getAccountInfo",
+            dataType:'json',
+            async: true,  // 注：ajax 同步情况下会阻塞一些js效果，比如页面跳转等等，所有注意同异步使用
+            success: function(data) {
+                let userList  = data.result.userList;
+                let tableData = $("#tableData");
+                // 先清空表格内容
+                tableData.empty();
+                $.each(userList,function (index,item) {
+                    //激活状态+操作按钮
+                    let state = '待激活';
+                    let operate = '<td><a href="#" onclick=stopButton()>停用</a>&nbsp;&nbsp;&nbsp;&nbsp;<a href="#" onclick=editButton()>编辑</a></td>';
+                    if(item.state == '1'){
+                        state = '已激活';
+                        operate = '<td><a href="#" onclick=stopButton()>停用</a>&nbsp;&nbsp;&nbsp;&nbsp;<a href="#" onclick=editButton()>编辑</a></td>';
+                    }else if(item.state == '-1'){
+                        state = '停用';
+                        operate = '<td><a href="#" onclick=startButton()>启用</a>&nbsp;&nbsp;&nbsp;&nbsp;<a href="#" onclick=editButton()>编辑</a></td>';
+                    }
+                    // 时间格式转换
+                    let date = new Date(item.updateTime);
+
+                    tableData.append('          <tr>\n' +
+                        '                            <td>'+(index+1)+'</td>\n' +
+                        '                            <td>'+item.email+'</td>\n' +
+                        '                            <td>'+item.name+'</td>\n' +
+                        '                            <td>*</td>\n' +
+                        '                            <td>*</td>\n' +
+                        '                            <td>'+item.phoneNum+'</td>\n' +
+                        '                            <td>'+date.toLocaleDateString()+'</td>\n' +
+                        '                            <td>'+state+'</td>\n' +
+                        operate +
+                        '                        </tr>');
+                });
+            },
+            error: function() {
+                alert("数据异常！");
+            }
+        });
     }
 
-    // 初始化
-    $(document).ready(function() {
-        loadDays();
-    });
+    /**
+     *  编辑按钮
+     */
+    function editButton() {
+        //显示弹窗
+        $("#addModal").modal('show');
+    }
+
+    /**
+     *  激活按钮
+     */
+    function activeUser() {
+        let form = $("#dataForm")[0];
+        let formData = new FormData(form);
+
+        formData.append("email","1");
+
+        $.ajax({
+            url: "/admin/activeUser",
+            data:formData,
+            type: "post",
+            dataType: "json", //jsonp会把请求类型强制转换为get请求
+            contentType: false,
+            processData: false,
+            async: true, //异步请求
+            cache: false, //是否缓存
+            success: function(data) {
+
+            },
+            error: function(jqXHR, textStatus, errorThrown){
+
+            }
+        });
+    }
+    
+    /**
+     * 启用按钮
+     */
+    function startButton() {
+
+    }
+
+    /**
+     * 停用按钮
+     */
+    function stopButton() {
+        
+    }
 </script>
 </html>
