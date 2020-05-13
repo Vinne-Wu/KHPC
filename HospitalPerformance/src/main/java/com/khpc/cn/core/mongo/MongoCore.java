@@ -3,6 +3,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.mongodb.core.MongoTemplate;
 import org.springframework.data.mongodb.core.query.Criteria;
 import org.springframework.data.mongodb.core.query.Query;
+import org.springframework.data.mongodb.core.query.Update;
 import org.springframework.stereotype.Component;
 
 import javax.annotation.PostConstruct;
@@ -71,5 +72,13 @@ public class MongoCore {
         mongoCoreUtil.mongoTemplate.insert(object,collectionName);
     }
 
-
+    /**
+     *  更新对象数据
+     * @param query
+     * @param update
+     * @param collectionName
+     */
+    public static void updateData(Query query, Update update,String collectionName){
+        mongoCoreUtil.mongoTemplate.upsert(query,update,collectionName);
+    }
 }

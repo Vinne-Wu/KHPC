@@ -10,6 +10,7 @@ import com.khpc.cn.web.service.RegisterService;
 import org.springframework.data.mongodb.core.query.Criteria;
 import org.springframework.stereotype.Service;
 
+import java.text.SimpleDateFormat;
 import java.util.Date;
 
 /**
@@ -29,6 +30,17 @@ public class RegisterServiceImpl implements RegisterService {
         user.setPhoneNum(bo.getPhoneNum());
         user.setRole(bo.getRole());
         user.setState("0");
+        // 时间设置
+        Date currentTime = new Date();
+        SimpleDateFormat formatter = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+        String dateString = formatter.format(currentTime);
+        user.setWorkTime(dateString);
+        user.setEducation("2");
+        user.setAcademicTitle("2");
+        user.setWorkPost("nurse");
+        user.setDepartment("surgery");
+        user.setSex("男");
+        user.setAge(25);
         user.setUpdateTime(new Date());
         try {
             MongoCore.addOne(user,"user");

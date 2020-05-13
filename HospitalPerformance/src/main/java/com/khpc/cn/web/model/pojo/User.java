@@ -1,5 +1,8 @@
 package com.khpc.cn.web.model.pojo;
 
+import org.springframework.data.annotation.Id;
+import org.springframework.data.mongodb.core.mapping.Field;
+
 import java.io.Serializable;
 import java.util.Date;
 
@@ -11,6 +14,12 @@ import java.util.Date;
 public class User implements Serializable {
 
     private static final long serialVersionUID = -2423356247995006863L;
+
+    /**
+     *  员工编码
+     */
+    @Field("_id")
+    private String id;
 
     /**
      *  用户名称（昵称）
@@ -48,22 +57,17 @@ public class User implements Serializable {
     private String education;
 
     /**
-     *  职称
+     *  职称  1.初级 2.中级 3.高级
      */
     private String academicTitle;
 
     /**
-     *  员工编码
-     */
-    private String identityCode;
-
-    /**
-     *  岗位
+     *  岗位   护士：nurse  医生：doctor
      */
     private String workPost;
 
     /**
-     * 科室
+     * 科室   外科：surgery
      */
     private String department;
 
@@ -71,6 +75,16 @@ public class User implements Serializable {
      *  账户状态   1：正常启用 0：待激活 -1：停用
      */
     private String state;
+
+    /**
+     *  性别
+     */
+    private String sex;
+
+    /**
+     * 年龄
+     */
+    private Integer age;
 
     /**
      *  账户更新时间
@@ -101,12 +115,12 @@ public class User implements Serializable {
         this.academicTitle = academicTitle;
     }
 
-    public String getIdentityCode() {
-        return identityCode;
+    public String getId() {
+        return id;
     }
 
-    public void setIdentityCode(String identityCode) {
-        this.identityCode = identityCode;
+    public void setId(String id) {
+        this.id = id;
     }
 
     public String getWorkPost() {
@@ -179,5 +193,21 @@ public class User implements Serializable {
 
     public void setDepartment(String department) {
         this.department = department;
+    }
+
+    public String getSex() {
+        return sex;
+    }
+
+    public void setSex(String sex) {
+        this.sex = sex;
+    }
+
+    public Integer getAge() {
+        return age;
+    }
+
+    public void setAge(Integer age) {
+        this.age = age;
     }
 }

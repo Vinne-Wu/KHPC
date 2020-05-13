@@ -1,10 +1,12 @@
 package com.khpc.cn.web.controller.admin;
 
 import com.khpc.cn.core.entity.JsonResult;
+import com.khpc.cn.web.model.bo.UserUpdateBo;
 import com.khpc.cn.web.service.AdminService;
 import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
@@ -139,6 +141,11 @@ public class AdminController {
         return adminService.getAccountInfo();
     }
 
+    /**
+     *  检索用户信息 -- 根据名称进行模糊检索
+     * @param searchName
+     * @return
+     */
     @RequestMapping("/searchUser")
     @ResponseBody
     public JsonResult<Map<String,Object>> searchUser(String searchName){
@@ -146,17 +153,25 @@ public class AdminController {
     }
 
     /**
+     *  检索用户信息 -- 根据id（_id）查询
+     * @param id
+     * @return
+     */
+    @RequestMapping("/searchUserById")
+    @ResponseBody
+    public JsonResult<Map<String,Object>> searchUserById(String id){
+        return adminService.searchUserById(id);
+    }
+
+    /**
      *  激活用户
-     * @param request
+     * @param updateBo
      * @return
      */
     @RequestMapping(value = "/activeUser")
     @ResponseBody
-    public JsonResult<Map<String,Object>> activeUser(HttpServletRequest request){
-
-        String remail =request.getParameter("email");
-
-        return null;
+    public JsonResult<Map<String,Object>> activeUser(@RequestBody UserUpdateBo updateBo){
+        return adminService.activeUser(updateBo);
     }
 
 }

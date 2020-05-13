@@ -1,6 +1,7 @@
 package com.khpc.cn.web.service;
 
 import com.khpc.cn.core.entity.JsonResult;
+import com.khpc.cn.web.model.bo.UserUpdateBo;
 
 import javax.servlet.http.HttpServletRequest;
 import java.util.Map;
@@ -27,8 +28,15 @@ public interface AdminService {
 
     /**
      * 激活用户
-     * @param request
+     * @param updateBo
      * @return
      */
-    JsonResult<Map<String,Object>> activeUser(HttpServletRequest request);
+    JsonResult<Map<String,Object>> activeUser(UserUpdateBo updateBo);
+
+    /**
+     * 根据id查询用户信息
+     * @param id
+     * @return
+     */
+    JsonResult<Map<String,Object>> searchUserById(String id);
 }
