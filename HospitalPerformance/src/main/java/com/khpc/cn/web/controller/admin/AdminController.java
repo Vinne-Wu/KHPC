@@ -174,4 +174,16 @@ public class AdminController {
         return adminService.activeUser(updateBo);
     }
 
+    /**
+     * 账户停用或者启用操作
+     * @param id
+     * @param state
+     * @return
+     */
+    @RequestMapping("/stopOrStartOperate")
+    @ResponseBody
+    public JsonResult<Map<String,Object>> stopOrStartOperate(String id,String state){
+        return adminService.stopOrStartOperate(id,state);
+    }
+
 }

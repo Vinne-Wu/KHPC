@@ -82,4 +82,21 @@ public class AdminServiceImpl implements AdminService {
         resultMap.put("user",user);
         return new JsonResult<>(MsgCode.SCCESS_CODE,"查询成功!",resultMap);
     }
+
+    @Override
+    public JsonResult<Map<String, Object>> stopOrStartOperate(String id, String state) {
+        Query query = new Query();
+        query.addCriteria(Criteria.where("_id").is(id));
+        Update update = new Update();
+        update.set("state", state);
+        MongoCore.updateData(query,update,"user");
+        String operateInfo = new String() ;
+        if("-1".equals(state)){
+            operateInfo = "停用成功！";
+        }
+        if("1".equals(state)){
+            operateInfo = "启用成功！";
+        }
+        return new JsonResult<>(MsgCode.SCCESS_CODE,operateInfo,null);
+    }
 }

@@ -298,13 +298,13 @@
                     if(item.role != "admin"){
                         //激活状态+操作按钮
                         let state = '待激活';
-                        let operate = '<td><a href="#" onclick=stopButton("'+item.id+'")>停用</a>&nbsp;&nbsp;&nbsp;&nbsp;<a href="#" onclick=editButton("'+item.id+'")>编辑</a></td>';
+                        let operate = '<td><a href="#" onclick=stopOrStartButton("'+item.id+'","-1")>停用</a>&nbsp;&nbsp;&nbsp;&nbsp;<a href="#" onclick=editButton("'+item.id+'")>编辑</a></td>';
                         if(item.state == '1'){
                             state = '已激活';
-                            operate = '<td><a href="#" onclick=stopButton("'+item.id+'")>停用</a>&nbsp;&nbsp;&nbsp;&nbsp;<a href="#" onclick=editButton("'+item.id+'")>编辑</a></td>';
+                            operate = '<td><a href="#" onclick=stopOrStartButton("'+item.id+'","-1")>停用</a>&nbsp;&nbsp;&nbsp;&nbsp;<a href="#" onclick=editButton("'+item.id+'")>编辑</a></td>';
                         }else if(item.state == '-1'){
                             state = '停用';
-                            operate = '<td><a href="#" onclick=startButton("'+item.id+'")>启用</a>&nbsp;&nbsp;&nbsp;&nbsp;<a href="#" onclick=editButton("'+item.id+'")>编辑</a></td>';
+                            operate = '<td><a href="#" onclick=stopOrStartButton("'+item.id+'","1")>启用</a>&nbsp;&nbsp;&nbsp;&nbsp;<a href="#" onclick=editButton("'+item.id+'")>编辑</a></td>';
                         }
                         // 时间格式转换
                         let date = new Date(item.updateTime);
@@ -349,13 +349,13 @@
                 $.each(userList,function (index,item) {
                     //激活状态+操作按钮
                     let state = '待激活';
-                    let operate = '<td><a href="#" onclick=stopButton("'+item.id+'")>停用</a>&nbsp;&nbsp;&nbsp;&nbsp;<a href="#" onclick=editButton("'+item.id+'")>编辑</a></td>';
+                    let operate = '<td><a href="#" onclick=stopOrStartButton("'+item.id+'","-1")>停用</a>&nbsp;&nbsp;&nbsp;&nbsp;<a href="#" onclick=editButton("'+item.id+'")>编辑</a></td>';
                     if(item.state == '1'){
                         state = '已激活';
-                        operate = '<td><a href="#" onclick=stopButton("'+item.id+'")>停用</a>&nbsp;&nbsp;&nbsp;&nbsp;<a href="#" onclick=editButton("'+item.id+'")>编辑</a></td>';
+                        operate = '<td><a href="#" onclick=stopOrStartButton("'+item.id+'","-1")>停用</a>&nbsp;&nbsp;&nbsp;&nbsp;<a href="#" onclick=editButton("'+item.id+'")>编辑</a></td>';
                     }else if(item.state == '-1'){
                         state = '停用';
-                        operate = '<td><a href="#" onclick=startButton("'+item.id+'")>启用</a>&nbsp;&nbsp;&nbsp;&nbsp;<a href="#" onclick=editButton("'+item.id+'")>编辑</a></td>';
+                        operate = '<td><a href="#" onclick=stopOrStartButton("'+item.id+'","1")>启用</a>&nbsp;&nbsp;&nbsp;&nbsp;<a href="#" onclick=editButton("'+item.id+'")>编辑</a></td>';
                     }
                     // 时间格式转换
                     let date = new Date(item.updateTime);
@@ -458,35 +458,33 @@
             async: true, //异步请求
             success: function(data) {
                 alert("激活成功!");
+                // 刷新列表
+                getAccountInfo();
             },
             error: function(jqXHR, textStatus, errorThrown){
 
             }
         });
     }
-    
-    /**
-     * 启用按钮
-     */
-    function startButton() {
 
-    }
 
     /**
-     * 停用按钮
+     * 停用或者启用按钮
      */
-    function stopButton() {
+    function stopOrStartButton(id,stateCode) {
         $.ajax({
-            url: "/admin/activeUser",
+            url: "/admin/stopOrStartOperate",
             type: "post",
             dataType: "json", //jsonp会把请求类型强制转换为get请求
-            data:parameters,
+            data: {
+                "id":id,
+                "state":stateCode
+            },
             async: true, //异步请求
-            cache: false, //是否缓存
-            processData: false,
-            contentType: false,
             success: function(data) {
-
+                alert(data.message);
+                // 刷新列表
+                getAccountInfo();
             },
             error: function(jqXHR, textStatus, errorThrown){
 

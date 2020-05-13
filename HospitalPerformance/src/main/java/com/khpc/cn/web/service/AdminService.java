@@ -39,4 +39,10 @@ public interface AdminService {
      * @return
      */
     JsonResult<Map<String,Object>> searchUserById(String id);
+
+    /**
+     * 停用或者启用
+     * @return
+     */
+    JsonResult<Map<String,Object>> stopOrStartOperate(String id,String state);
 }
