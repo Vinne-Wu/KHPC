@@ -9,7 +9,7 @@ import java.util.Date;
 /**
  * @author Vinne
  * @date 2020/1/19 0:41
- * @description
+ * @description 用户模型
  **/
 public class User implements Serializable {
 

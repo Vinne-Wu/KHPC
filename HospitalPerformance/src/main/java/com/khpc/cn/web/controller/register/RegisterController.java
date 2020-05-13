@@ -1,10 +1,19 @@
 package com.khpc.cn.web.controller.register;
 
 
+import com.khpc.cn.core.entity.JsonResult;
+import com.khpc.cn.web.model.pojo.AssessmentPlan;
+import com.khpc.cn.web.model.pojo.JxIndex;
+import com.khpc.cn.web.service.RegisterService;
 import org.apache.log4j.Logger;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.ResponseBody;
+
 import java.util.Date;
+import java.util.Map;
 
 
 /**
@@ -17,6 +26,9 @@ import java.util.Date;
 public class RegisterController {
 
    private static Logger logger = Logger.getLogger(RegisterController.class);
+
+   @Autowired
+   private RegisterService registerService;
 
     /**
      *  填报员首页
@@ -84,6 +96,7 @@ public class RegisterController {
      */
     @RequestMapping("/skipIndexP")
     public String skipIndexP(){
+
         return "/register/indexProject";
     }
 
@@ -110,5 +123,49 @@ public class RegisterController {
     @RequestMapping("/skipDas")
     public String skipDas(){
         return "/register/dataStatistics";
+    }
+
+    /*************************************  数据处理模块  *************************************/
+    /**
+     *  新增绩效考核方案
+     * @return
+     */
+    @RequestMapping("/addJxPlan")
+    @ResponseBody
+    public JsonResult<Map<String,Object>> addJxPlan(@RequestBody AssessmentPlan plan){
+        return registerService.addJxPlan(plan);
+    }
+
+    /**
+     * 新增绩效考核指标
+     * @param index
+     * @return
+     */
+    @RequestMapping("/addJxIndex")
+    @ResponseBody
+    public JsonResult<Map<String,Object>> addJxIndex(@RequestBody JxIndex index){
+        return registerService.addJxIndex(index);
+    }
+
+    /**
+     *  查询所有方案的指标
+     * @return
+     */
+    @RequestMapping("/searchIndexs")
+    @ResponseBody
+    public JsonResult<Map<String,Object>> searchIndexs(String planId){
+        return registerService.searchIndexs(planId);
+    }
+
+    /**
+     * 删除指标
+     * @param planId
+     * @param indexCode
+     * @return
+     */
+    @RequestMapping("/removeIndex")
+    @ResponseBody
+    public JsonResult<Map<String,Object>> removeIndex(String planId,String indexCode){
+        return registerService.removeIndex(planId,indexCode);
     }
 }

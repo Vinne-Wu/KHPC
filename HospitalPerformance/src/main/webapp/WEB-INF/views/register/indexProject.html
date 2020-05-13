@@ -24,37 +24,37 @@
                             <span class="choose">
                                 <label>方案名称:</label>
                                 <div class="kv-item-content">
-                                    <input type="text" placeholder="一季度绩效考核方案"  style="width: 85%"/>
+                                    <input type="text" id="planName" class="form-control" style="width: 85%"/>
                                 </div>
                             </span>
 
                             <span class="choose">
                                 <label>考核年份:</label>
                                 <div class="kv-item-content">
-                                    <select>
-                                        <option>2019年</option>
-                                        <option selected="selected">2020年</option>
-                                        <option>2021年</option>
+                                    <select id="khnf" style="width: 100px;">
+                                        <option value="2019">2019年</option>
+                                        <option value="2020" selected="selected">2020年</option>
+                                        <option value="2021">2021年</option>
                                     </select>
                                 </div>
                             </span>
 
-                            <span  class="choose" id="khyf">
+                            <span  class="choose">
                                 <label>考核月份:</label>
                                 <div class="kv-item-content">
-                                    <select id="khyfs">
-                                        <option value=1>1月</option>
-                                        <option value=2>2月</option>
-                                        <option selected="selected" value=3>3月</option>
-                                        <option value=4>4月</option>
-                                        <option value=5>5月</option>
-                                        <option value=6>6月</option>
-                                        <option value=7>7月</option>
-                                        <option value=8>8月</option>
-                                        <option value=9>9月</option>
-                                        <option value=10>10月</option>
-                                        <option value=11>11月</option>
-                                        <option value=12>12月</option>
+                                    <select id="khyf" style="width: 100px;">
+                                        <option value="1">1月</option>
+                                        <option value="2">2月</option>
+                                        <option value="3">3月</option>
+                                        <option value="4">4月</option>
+                                        <option value="5" selected="selected">5月</option>
+                                        <option value="6">6月</option>
+                                        <option value="7">7月</option>
+                                        <option value="8">8月</option>
+                                        <option value="9">9月</option>
+                                        <option value="10">10月</option>
+                                        <option value="11">11月</option>
+                                        <option value="12">12月</option>
                                     </select>
                                 </div>
                             </span>
@@ -62,48 +62,53 @@
                     </div>
                 </div>
                 <div class="search-button">
-                    <input class="button" type="button" value="确定方案" />
+                    <input class="button" type="button" value="确定方案" onclick="submitPlan()"/>
                 </div>
             </div>
 
             <div class="table">
                 <div class="opt ue-clear">
-                	<span class="sortarea">
-                    	<span class="sort">
-                        	<label>排序：</label>
-                            <span class="name">
-                            	<i class="icon"></i>
-                                <span class="text">名称</span>
-                            </span>
-                        </span>
-
-                        <i class="list"></i>
-                        <i class="card"></i>
-                    </span>
                     <span class="optarea">
-                        <a href="javascript:;" class="add" data-toggle="modal" data-target="#addModal">
+                        <a href="#" class="add" data-toggle="modal" onclick="addIndex()">
                             <i class="icon"></i>
                             <span class="text">添加</span>
                         </a>
-                        <a href="javascript:;" class="delete" data-toggle="modal" data-target="#delModal">
-                            <i class="icon"></i>
-                            <span class="text">删除</span>
-                        </a>
-
-                        <a href="javascript:;" class="statistics">
-                            <i class="icon"></i>
-                            <span class="text">统计</span>
-                        </a>
-
-                        <a href="javascript:;" class="config">
-                            <i class="icon"></i>
-                            <span class="text">配置</span>
-                        </a>
+<!--                        <a href="javascript:;" class="delete" data-toggle="modal" data-target="#delModal">-->
+<!--                            <i class="icon"></i>-->
+<!--                            <span class="text">删除</span>-->
+<!--                        </a>-->
+<!--                        <a href="javascript:;" class="statistics">-->
+<!--                            <i class="icon"></i>-->
+<!--                            <span class="text">统计</span>-->
+<!--                        </a>-->
+<!--                        <a href="javascript:;" class="config">-->
+<!--                            <i class="icon"></i>-->
+<!--                            <span class="text">配置</span>-->
+<!--                        </a>-->
                     </span>
                 </div>
 
-                <div class="grid"></div>
-
+                <!-- 表单内容 class="grid"-->
+                <div>
+                    <table class="table table-bordered table-hover">
+                        <thead>
+                        <tr>
+                            <th>科室名称</th>
+                            <th>指标名称</th>
+                            <th>指标编码</th>
+                            <th>指标类别</th>
+                            <th>指标类型</th>
+                            <th>标化系数</th>
+                            <th>工作标量</th>
+                            <th>绩效因子</th>
+                            <th>操作</th>
+                        </tr>
+                        </thead>
+                        <tbody id="dataBody">
+                        </tbody>
+                    </table>
+                </div>
+                <!-- 分页 -->
                 <div class="pagination"></div>
             </div>
         </div>
@@ -125,52 +130,45 @@
 
             <div class="modal-body">
                 <div class="kv-item ue-clear">
-                    <label><span class="impInfo">*</span>方案名称</label>
-                    <div class="kv-item-content">
-                        <input type="text" placeholder="一季度绩效考核方案" disabled="disabled" />
-                    </div>
-                </div>
-
-                <div class="kv-item ue-clear">
                     <label><span class="impInfo">*</span>指标名称</label>
                     <div class="kv-item-content">
-                        <input type="text" placeholder="指标名称" />
+                        <input type="text" placeholder="指标名称" id="indexName"/>
                     </div>
                 </div>
                 <div class="kv-item ue-clear">
                     <label><span class="impInfo">*</span>指标编码</label>
                     <div class="kv-item-content">
-                        <input type="text" placeholder="指标编码" />
+                        <input type="text" placeholder="指标编码" id="indexCode"/>
                     </div>
                 </div>
                 <div class="kv-item ue-clear">
                     <label><span class="impInfo">*</span>指标类别</label>
                     <div class="kv-item-content">
-                        <input type="text" placeholder="医生：D，护士：N" />
+                        <input type="text" placeholder="医生：D，护士：N" id="indexCategory"/>
                     </div>
                 </div>
                 <div class="kv-item ue-clear">
                     <label><span class="impInfo">*</span>指标类型</label>
                     <div class="kv-item-content">
-                        <input type="text" placeholder="硬性指标 / 非硬性指标" />
+                        <input type="text" placeholder="硬性指标 / 非硬性指标" id="indexType"/>
                     </div>
                 </div>
                 <div class="kv-item ue-clear">
                     <label><span class="impInfo">*</span>标化系数</label>
                     <div class="kv-item-content">
-                        <input type="text" placeholder="基本工作量：1" />
+                        <input type="text" placeholder="基本工作量：1" id="ratio"/>
                     </div>
                 </div>
                 <div class="kv-item ue-clear">
                     <label><span class="impInfo">*</span>工作标量</label>
                     <div class="kv-item-content">
-                        <input type="text" placeholder="值：标化系数*基本工作量" />
+                        <input type="text" placeholder="值：标化系数*基本工作量" id="scalar"/>
                     </div>
                 </div>
                 <div class="kv-item ue-clear">
                     <label><span class="impInfo">*</span>绩效因子</label>
                     <div class="kv-item-content">
-                        <input type="text" placeholder="非硬性指标必填项，硬性指标填 '-' 即可" />
+                        <input type="text" placeholder="非硬性指标必填项，硬性指标填 '-' 即可" id="factorNum"/>
                     </div>
                 </div>
             </div>
@@ -178,7 +176,7 @@
             <div class="modal-footer">
                 <button type="button" class="btn btn-default" data-dismiss="modal">关闭
                 </button>
-                <button type="button" class="btn btn-primary">
+                <button type="button" class="btn btn-primary" onclick="addJxIndex()">
                     提交
                 </button>
             </div>
@@ -187,7 +185,7 @@
 </div>
 <!-- 新增指标弹出框 end -->
 
-<!-- 新增指标弹出框 start -->
+<!-- 删除指标弹出框 start -->
 <div style="display: none" class="modal fade" id="delModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
     <div class="modal-dialog">
         <div class="modal-content">
@@ -230,11 +228,14 @@
         </div><!-- /.modal-content -->
     </div><!-- /.modal -->
 </div>
-<!-- 新增指标弹出框 end -->
+<!-- 删除指标弹出框 end -->
 
+<!-- 临时数据存储 -->
+<input type="hidden" id="department">
+<input type="hidden" id="planId">
 </body>
-<script type="text/javascript" src="/static/iform/js/jquery.js"></script>
-<script type="text/javascript" src="/static/iform/js/global.js"></script>
+<!--<script type="text/javascript" src="/static/iform/js/jquery.js"></script>-->
+<!--<script type="text/javascript" src="/static/iform/js/global.js"></script>-->
 <script type="text/javascript" src="/static/iform/js/jquery.select.js"></script>
 <script type="text/javascript" src="/static/iform/js/core.js"></script>
 <script type="text/javascript" src="/static/iform/js/jquery.pagination.js"></script>
@@ -242,203 +243,12 @@
 <script type="text/javascript" src="/static/iform/js/WdatePicker.js"></script>
 <script type="text/javascript">
 
-    $('select').select();
-    var head = [{
-        label: '科室名称',
-        width: 120,
-        name: 'ks'
-    },{
-        label: '指标编码',
-        width: 120,
-        sortable: 'default',
-        name: 'id'
-    },{
-        label:'指标名称',
-        width: 350,
-        name:'name'
-    },{
-        label:'标化系数',
-        width:150
-    },{
-        label: '标化工作量',
-        width: 150
-    },{
-        label: '服务次数',
-        width: 150
-    },{
-        label: '绩效工作量',
-        sortable: 'default',
-        width: 150
-    },{
-        label: '考核日期',
-        width: 150
-    },{
-        label: '是否审核',
-        width:150
-    }];
-
-    var oper = [{label:'删除',onclick:function(){
-            alert('删除');
-        }},{label:'详情',onclick: function(){
-            alert('编辑')
-        }}]
-    var tbody = [
-        ["护理科","N01001","护理记录单","1","1","12",12,"2020-2-15","已审核",oper],
-        ["护理科","N01002","晨间护理","2","2","4",8,"2020-2-15","已审核",oper],
-        ["护理科","N01003","幼儿身体清洁","3","3","7",21,"2020-2-15","已审核",oper],
-        ["护理科","N01004","健康指导","2","2","3",6,"2020-2-15","已审核",oper],
-        ["护理科","N01005","夜班","15","15","4",60,"2020-2-15","已审核",oper],
-        ["护理科","N01006","病人六洁","8","8","2",16,"2020-2-15","已审核",oper],
-        ["护理科","N01007","病房环境","4","4","8",32,"2020-2-15","已审核",oper],
-        ["护理科","N01008","入院教育","3","3","8",24,"2020-2-15","已审核",oper],
-        ["护理科","N01009","出院教育","3","3","10",30,"2020-2-15","已审核",oper],
-        ["护理科","N010010","健康指导","4","4","2",16,"2020-2-15","已审核",oper],
-        ["护理科","N010011","基础操作","10","10","17",170,"2020-2-15","已审核",oper],
-        ["护理科","N010012","辅班","10","10","18",180,"2020-2-15","已审核",oper],
-        ["护理科","N010013","主班","20","20","8",160,"2020-2-15","已审核",oper]
-    ]
-
-    $('.grid').Grid({
-        thead: head,
-        tbody: null,
-        height:400,
-        checkbox: {
-            single:true
-        },
-        operator: {
-            type : "normal",
-            width : 100
-        },
-        sortCallBack : function(name,index,type){
-            alert(name+","+index+','+type);
-        }
-
-    });
-
-    $('.grid').Grid('addLoading');
-
-    /// 模拟异步
-    setTimeout(function(){
-        $('.grid').Grid('setData',tbody, head);
-    },2000)
-
-
-    $('.pagination').pagination(100,{
-        callback: function(page){
-            alert(page);
-        },
-        display_msg: false
-    });
-
-    $('.search-box input[type=radio]').click(function(e) {
-        if($(this).prop('checked')){
-            if($(this).attr('data-define') === 'define'){
-                $('.define-input').show();
-            }else{
-                $('.define-input').hide();
-            }
-        }
-    });
-
-    // 表单数据
-    // $('select').select();
-    // var head =
-    //     [{
-    //         label: '方案名称',
-    //         width:180
-    //     },{
-    //         label: '科室名称',
-    //         width: 120,
-    //         name: 'ks'
-    //     },{
-    //         label: '科室编码',
-    //         width: 120,
-    //         name: 'ksBM'
-    //     },{
-    //         label: '指标编码',
-    //         width: 120,
-    //         name: 'id'
-    //     },{
-    //         label:'指标名称',
-    //         width: 200,
-    //         name:'name'
-    //     },{
-    //         label: '指标类型',
-    //         width: 150
-    //     },{
-    //         label:'指标类别',
-    //         width:150
-    //     },{
-    //         label: '标化系数',
-    //         width: 150
-    //     },{
-    //         label: '工作标量',
-    //         sortable: 'default',
-    //         width: 150
-    //     },{
-    //         label: '绩效因子',
-    //         width: 150
-    // }];
-    //
-    // var oper = [{label:'删除',onclick:function(){
-    //         alert('删除');
-    //     }},{label:'编辑',onclick: function(){
-    //         alert('编辑')
-    //     }}]
-    // var tbody = [
-    //     ["一季度绩效考核方案","护理科","N01","N01001","护理记录单","硬性指标","N","1","1","-",oper] ,
-    //     ["一季度绩效考核方案","护理科","N01","N01002","晨间护理","硬性指标","N","2","2","-",oper] ,
-    //     ["一季度绩效考核方案","护理科","N01","N01003","幼儿身体清洁","硬性指标","N","3","3","-",oper] ,
-    //     ["一季度绩效考核方案","护理科","N01","N01004","健康指导","硬性指标","N","2","2","-",oper] ,
-    //     ["一季度绩效考核方案","护理科","N01","N01005","夜班","硬性指标","N","15","15","-",oper] ,
-    //     ["一季度绩效考核方案","护理科","N01","N01006","病人六洁","硬性指标","N","8","8","-",oper] ,
-    //     ["一季度绩效考核方案","护理科","N01","N01007","病房环境","硬性指标","N","4","4","-",oper] ,
-    //     ["一季度绩效考核方案","护理科","N01","N01008","入院教育","硬性指标","N","3","3","-",oper] ,
-    //     ["一季度绩效考核方案","护理科","N01","N01009","出院教育","硬性指标","N","3","3","-",oper] ,
-    //     ["一季度绩效考核方案","护理科","N01","N010010","论文发表","非硬性指标","N","-","-","0.01",oper]
-    // ]
-    //
-    //
-    // $('.grid').Grid({
-    //     thead: head,
-    //     tbody: null,
-    //     height:400,
-    //     checkbox: {
-    //         single:true
-    //     },
-    //     operator: {
-    //         type : "normal",
-    //         width : 100
-    //     },
-    //     sortCallBack : function(name,index,type){
-    //         alert(name+","+index+','+type);
-    //     }
-    //
-    // });
-    //
-    // $('.grid').Grid('addLoading');
-    //
-    // /// 模拟异步
-    // setTimeout(function(){
-    //     $('.grid').Grid('setData',tbody, head);
-    // },2000)
-    //
-    //
+    // 分页组件，暂时隐藏
     // $('.pagination').pagination(100,{
     //     callback: function(page){
     //         alert(page);
     //     },
     //     display_msg: false
-    // });
-    //
-    // $('.search-box input[type=radio]').click(function(e) {
-    //     if($(this).prop('checked')){
-    //         if($(this).attr('data-define') === 'define'){
-    //             $('.define-input').show();
-    //         }else{
-    //             $('.define-input').hide();
-    //         }
-    //     }
     // });
 
     /**
@@ -465,7 +275,208 @@
 
     // 初始化
     $(document).ready(function() {
-        loadDays();
+        //loadDays();
+        // 获取用户信息
+        getUerInfo();
     });
+
+    /**
+     *  新增指标
+     */
+    function addIndex() {
+        $("#addModal").modal('show');
+    }
+
+    /**
+     *  新增指标 -- 激活指标
+     */
+     function addJxIndex() {
+        // 表单参数
+        let parameters = {
+            "planId":$("#planId").val(),
+            "indexName":$("#indexName").val(),
+            "indexCode":$("#indexCode").val(),
+            "indexCategory":$("#indexCategory").val(),
+            "indexType":$("#indexType").val(),
+            "ratio":$("#ratio").val(),
+            "scalar":$("#scalar").val(),
+            "factorNum":$("#factorNum").val()
+        }
+
+        $.ajax({
+            url: "/register/addJxIndex",
+            type: "post",
+            dataType: "json", //jsonp会把请求类型强制转换为get请求
+            data:JSON.stringify(parameters),
+            contentType: 'application/json;charset=utf-8',
+            async: true, //异步请求
+            success: function(data) {
+                alert(data.message);
+                // 刷新指标
+                searchIndexs();
+            },
+            error: function(jqXHR, textStatus, errorThrown){
+                alert("数据处理异常！");
+            }
+        });
+    }
+
+    /**
+     * 查询方案下的所有指标
+     */
+    function searchIndexs() {
+        $("#addModal").modal('hide');
+
+        // 表单参数
+        let parameters = {
+            "planId":$("#planId").val()
+        }
+
+        $.ajax({
+            url: "/register/searchIndexs",
+            type: "post",
+            dataType: "json", //jsonp会把请求类型强制转换为get请求
+            data:parameters,
+            async: true, //异步请求
+            success: function(data) {
+                let list = data.result.list;
+                let departmentName = $("#department").val();
+                $("#dataBody").empty();
+                if(list.length > 0){
+                    // 遍历指标数据
+                    $.each(list,function (index,item) {
+                        $("#dataBody").append(displayIndex(departmentName,item));
+                    });
+                }
+            },
+            error: function(jqXHR, textStatus, errorThrown){
+                alert("数据处理异常！");
+            }
+        });
+    }
+
+    /**
+     * 遍历指标
+     */
+    function displayIndex(departmentName,item) {
+        let category = '医生';
+        if(item.indexCategory == 'N'){
+            category = '护士';
+        }
+        let type = '硬性指标';
+        if(item.indexType == '-1'){
+            type = '非硬性指标';
+        }
+        // 对科室进行转译
+        let department ;
+        if(departmentName == 'surgery'){
+            department = '外科';
+        }
+
+        let html = '  <tr>\n' +
+            '            <td>'+department+'</td>\n' +
+            '            <td>'+item.indexName+'</td>\n' +
+            '            <td>'+item.indexCode+'</td>\n' +
+            '            <td>'+category+'</td>\n' +
+            '            <td>'+type+'</td>\n' +
+            '            <td>'+item.ratio+'</td>\n' +
+            '            <td>'+item.scalar+'</td>\n' +
+            '            <td>'+item.factorNum+'</td>\n' +
+            '            <td><a onclick=removeIndex("'+item.indexCode+'")>删除</a>&nbsp;&nbsp;&nbsp;<a>编辑</a></td>\n' +
+            '        </tr>'
+
+        return html;
+    }
+
+    /**
+     * 删除指标
+     */
+    function removeIndex(indexId) {
+        // 表单参数
+        let parameters = {
+            "planId":$("#planId").val(),
+            "indexCode":indexId
+        }
+
+        $.ajax({
+            url: "/register/removeIndex",
+            type: "post",
+            dataType: "json", //jsonp会把请求类型强制转换为get请求
+            data:parameters,
+            async: true, //异步请求
+            success: function(data) {
+                alert(data.message);
+                // 刷新指标
+                searchIndexs();
+            },
+            error: function(jqXHR, textStatus, errorThrown){
+                alert("数据处理异常！");
+            }
+        });
+    }
+
+    /**
+     *  提交方案
+     */
+    function submitPlan() {
+        let planName = $("#planName").val();
+        if(planName == "" || planName ==null){
+            alert("方案名称不能为空！");
+            return;
+        }
+
+        // 表单参数
+        let parameters = {
+            "planName":$("#planName").val(),
+            "khnf":$("#khnf").val(),
+            "khyf":$("#khyf").val(),
+            "departName":$("#department").val(),
+            "state":"-1"
+        }
+
+        $.ajax({
+            url: "/register/addJxPlan",
+            type: "post",
+            dataType: "json", //jsonp会把请求类型强制转换为get请求
+            data:JSON.stringify(parameters),
+            contentType: 'application/json;charset=utf-8',
+            async: true, //异步请求
+            success: function(data) {
+                let planId = data.result.planId;
+                if(data.code == 200){
+                    $("#planId").val(planId);
+                }
+                alert(data.message);
+                // 查询方案下的所有指标
+                searchIndexs();
+            },
+            error: function(jqXHR, textStatus, errorThrown){
+                alert("数据处理异常！");
+            }
+        });
+    }
+
+    /**
+     * 获取登录账户信息
+     */
+    function getUerInfo() {
+        $.ajax({
+            type: "POST",
+            url:"/common/getUserInfo",
+            dataType:'json',
+            async: true,  // 注：ajax 同步情况下会阻塞一些js效果，比如页面跳转等等，所有注意同异步使用
+            success: function(data) {
+                if(data.code == 200){
+                    // 获取用户信息
+                    let user = data.result;
+                    // 参数设置
+                    $("#department").val(user.department);
+                }
+            },
+            error: function() {
+                alert("数据异常！");
+            }
+        });
+    }
 </script>
 </html>

@@ -81,4 +81,16 @@ public class MongoCore {
     public static void updateData(Query query, Update update,String collectionName){
         mongoCoreUtil.mongoTemplate.upsert(query,update,collectionName);
     }
+
+    /**
+     * 根据条件删除元素
+     * @param criteria
+     * @param collectionName
+     * @return
+     */
+    public static Object delete(Criteria criteria,String collectionName){
+        Query coreQuery= new Query();
+        coreQuery.addCriteria(criteria);
+        return mongoCoreUtil.mongoTemplate.remove(coreQuery,collectionName);
+    }
 }
