@@ -56,4 +56,13 @@ public interface RegisterService {
      * @return
      */
     JsonResult<Map<String,Object>> removeIndex(String planId,String indexCode);
+
+    /**
+     * 查询考核方案
+     * @param departName
+     * @param khyf
+     * @param khnf
+     * @return
+     */
+    JsonResult<Map<String,Object>> searchKHFA(String departName,String khyf,String khnf);
 }

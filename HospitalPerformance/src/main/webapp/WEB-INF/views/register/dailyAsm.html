@@ -7,6 +7,9 @@
     <link rel="stylesheet" type="text/css" href="/static/iform/css/WdatePicker.css" />
     <link rel="stylesheet" type="text/css" href="/static/iform/css/skin_/table.css" />
     <link rel="stylesheet" type="text/css" href="/static/iform/css/jquery.grid.css" />
+    <script src="/static/assets/js/jquery-1.11.1.min.js"></script>
+    <script src="/static/assets/bootstrap/js/bootstrap.min.js"></script>
+    <link rel="stylesheet" href="/static/assets/bootstrap/css/bootstrap.min.css">
 </head>
 
 <body>
@@ -21,46 +24,44 @@
                             <span class="choose">
                                 <label>方案名称:</label>
                                 <div class="kv-item-content">
-                                    <input type="text" placeholder="一季度绩效考核方案"  style="width: 85%"/>
+                                     <select id="khfa" style="width:120px;">
+
+                                     </select>
                                 </div>
                             </span>
 
                             <span class="choose">
                                 <label>考核年份:</label>
                                 <div class="kv-item-content">
-                                    <select>
-                                        <option>2019年</option>
-                                        <option selected="selected">2020年</option>
-                                        <option>2021年</option>
+                                    <select id="khnf" style="width:100px;">
+                                        <option value="2020" selected="selected">2020年</option>
                                     </select>
                                 </div>
                             </span>
 
-                            <span  class="choose" id="khyf">
+                            <span  class="choose">
                                 <label>考核月份:</label>
                                 <div class="kv-item-content">
-                                    <select id="khyfs">
-                                        <option value=1>1月</option>
-                                        <option value=2>2月</option>
-                                        <option selected="selected" value=3>3月</option>
-                                        <option value=4>4月</option>
-                                        <option value=5>5月</option>
-                                        <option value=6>6月</option>
-                                        <option value=7>7月</option>
-                                        <option value=8>8月</option>
-                                        <option value=9>9月</option>
-                                        <option value=10>10月</option>
-                                        <option value=11>11月</option>
-                                        <option value=12>12月</option>
+                                      <select id="khyf" style="width:100px;">
+                                        <option value="5" selected="selected">5月</option>
                                     </select>
                                 </div>
                             </span>
 
-                            <span  class="choose" id="khrq">
+                            <span  class="choose">
                                 <label>考核日期:</label>
                                 <div class="kv-item-content">
-                                    <select id="khrqs">
-                                        <option value=9>9</option>
+                                    <select id="khrq" style="width:100px;">
+                                        <option value="14">14</option>
+                                    </select>
+                                </div>
+                            </span>
+
+                            <span  class="choose">
+                                <label>考核人员:</label>
+                                <div class="kv-item-content">
+                                    <select id="khry" style="width:100px;">
+                                        <option>张三</option>
                                     </select>
                                 </div>
                             </span>
@@ -68,7 +69,7 @@
                     </div>
                 </div>
                 <div class="search-button">
-                    <input class="button" type="button" value="确认填报" />
+                    <input class="button" type="button" value="确认填报" onclick="submitForm()"/>
                 </div>
             </div>
 
@@ -93,7 +94,23 @@
                     </span>
                 </div>
 
-                <div class="grid"></div>
+                <div>
+                    <table class="table table-bordered table-hover">
+                        <thead style="background-color:#f6f6f6">
+                        <tr>
+                            <th>指标名称</th>
+                            <th>指标编码</th>
+                            <th>工作标量</th>
+                            <th>服务次数</th>
+                            <th>当日绩效因子</th>
+                            <th>绩效工作量</th>
+                        </tr>
+                        </thead>
+                        <tbody id="tableData">
+
+                        </tbody>
+                    </table>
+                </div>
 
                 <div class="pagination"></div>
             </div>
@@ -101,111 +118,20 @@
     </div>
 </div>
 </body>
-<script type="text/javascript" src="/static/iform/js/jquery.js"></script>
-<script type="text/javascript" src="/static/iform/js/global.js"></script>
+<!--<script type="text/javascript" src="/static/iform/js/jquery.js"></script>-->
+<!--<script type="text/javascript" src="/static/iform/js/global.js"></script>-->
 <script type="text/javascript" src="/static/iform/js/jquery.select.js"></script>
 <script type="text/javascript" src="/static/iform/js/core.js"></script>
 <script type="text/javascript" src="/static/iform/js/jquery.pagination.js"></script>
 <script type="text/javascript" src="/static/iform/js/jquery.grid.js"></script>
 <script type="text/javascript" src="/static/iform/js/WdatePicker.js"></script>
 <script type="text/javascript">
-    $('select').select();
-    var head = [{
-        label: '科室名称',
-        width: 120,
-        name: 'ks'
-    },{
-        label: '指标编码',
-        width: 120,
-        sortable: 'default',
-        name: 'id'
-    },{
-        label:'指标名称',
-        width: 350,
-        name:'name'
-    },{
-        label:'标化系数',
-        width:150
-    },{
-        label: '标化工作量',
-        width: 150
-    },{
-        label: '服务次数',
-        width: 150
-    },{
-        label: '绩效工作量',
-        sortable: 'default',
-        width: 150
-    },{
-        label: '考核日期',
-        width: 150
-    },{
-        label: '是否审核',
-        width:150
-    }];
-
-    var oper = [{label:'编辑',onclick:function(){
-            alert('编辑');
-        }},{label:'删除',onclick: function(){
-            alert('删除')
-        }}]
-    var tbody = [
-        ["护理科","N01001","护理记录单","1","1","12",12,"2020-3-10","已审核",oper],
-        ["护理科","N01002","晨间护理","2","2","4",8,"2020-3-10","已审核",oper],
-        ["护理科","N01003","幼儿身体清洁","3","3","7",21,"2020-3-10","已审核",oper],
-        ["护理科","N01004","健康指导","2","2","3",6,"2020-3-10","已审核",oper],
-        ["护理科","N01005","夜班","15","15","4",60,"2020-3-10","已审核",oper],
-        ["护理科","N01006","病人六洁","8","8","2",16,"2020-3-10","已审核",oper],
-        ["护理科","N01007","病房环境","4","4","8",32,"2020-3-10","已审核",oper],
-        ["护理科","N01008","入院教育","3","3","8",24,"2020-3-10","已审核",oper],
-        ["护理科","N01009","出院教育","3","3","10",30,"2020-3-10","已审核",oper],
-        ["护理科","N010010","健康指导","4","4","2",16,"2020-3-10","已审核",oper],
-        ["护理科","N010011","基础操作","10","10","17",170,"2020-3-10","已审核",oper],
-        ["护理科","N010012","辅班","10","10","18",180,"2020-3-10","已审核",oper],
-        ["护理科","N010013","主班","20","20","8",160,"2020-3-10","已审核",oper]
-    ]
-
-    $('.grid').Grid({
-        thead: head,
-        tbody: null,
-        height:400,
-        checkbox: {
-            single:true
-        },
-        operator: {
-            type : "normal",
-            width : 100
-        },
-        sortCallBack : function(name,index,type){
-            alert(name+","+index+','+type);
-        }
-
-    });
-
-    $('.grid').Grid('addLoading');
-
-    /// 模拟异步
-    setTimeout(function(){
-        $('.grid').Grid('setData',tbody, head);
-    },2000)
-
-
-    $('.pagination').pagination(100,{
-        callback: function(page){
-            alert(page);
-        },
-        display_msg: false
-    });
-
-    $('.search-box input[type=radio]').click(function(e) {
-        if($(this).prop('checked')){
-            if($(this).attr('data-define') === 'define'){
-                $('.define-input').show();
-            }else{
-                $('.define-input').hide();
-            }
-        }
-    });
+    // $('.pagination').pagination(100,{
+    //     callback: function(page){
+    //         alert(page);
+    //     },
+    //     display_msg: false
+    // });
 
     /**
      * 加载考核日期
@@ -231,7 +157,92 @@
 
     // 初始化
     $(document).ready(function() {
-        loadDays();
+        //loadDays();
+
+        getUerInfo();
     });
+
+    /**
+     *  提交表单数据
+     */
+    function submitForm() {
+        alert("保存成功！");
+    }
+
+    /**
+     * 获取登录账户信息
+     */
+    function getUerInfo() {
+        $.ajax({
+            type: "POST",
+            url:"/common/getUserInfo",
+            dataType:'json',
+            async: true,  // 注：ajax 同步情况下会阻塞一些js效果，比如页面跳转等等，所有注意同异步使用
+            success: function(data) {
+                if(data.code == 200){
+                    // 获取用户信息
+                    let user = data.result;
+                    // 加载考核方案
+                    loadKHFA(user.department);
+                }
+            },
+            error: function() {
+                alert("数据异常！");
+            }
+        });
+    }
+
+    /**
+     *  加载考核方案
+     */
+    function loadKHFA(department) {
+        $.ajax({
+            url: "/register/searchKHFA",
+            type: "post",
+            dataType: "json", //jsonp会把请求类型强制转换为get请求
+            data:{
+                "departName":department,
+                "khyf":$("#khyf").val(),
+                "khnf":$("#khnf").val()
+            },
+            async: true, //异步请求
+            success: function(data) {
+                let faList = data.result.faList;
+                $("#khfa").empty();
+                if(faList.length > 0){
+                    $.each(faList,function (index,item) {
+                        $("#khfa").append('<option>'+item.planName+'</option>');
+                    });
+
+                    let indexList = data.result.indexList;
+                    $("#tableData").empty();
+                    if(indexList !=null && indexList.length>0){
+                        $.each(indexList,function (itx,itm) {
+                            $("#tableData").append(' <tr>\n' +
+                                '                            <th>'+itm.indexName+'</th>\n' +
+                                '                            <th>'+itm.indexCode+'</th>\n' +
+                                '                            <th>'+itm.scalar+'</th>\n' +
+                                '                            <th><input type="text" value="0" id="fwcs_'+itx+'" onblur=jxGzl('+itx+','+itm.scalar+')></th>\n' +
+                                '                            <th><input type="text" value="0" id="jxyz_'+itx+'" onblur=jxGzl('+itx+','+itm.scalar+')></th>\n' +
+                                '                            <th id="jxgzl_'+itx+'"></th>\n' +
+                                '   </tr>');
+                        });
+                    }
+                }
+            },
+            error: function(jqXHR, textStatus, errorThrown){
+                alert("数据处理异常！");
+            }
+        });
+    }
+
+    /**
+     *  指标计算工作量计算
+     */
+    function jxGzl(index,scalar) {
+        let fwcs = parseInt($("#fwcs_"+index+"").val());
+        let jxyz = parseInt($("#jxyz_"+index+"").val());
+        $("#jxgzl_"+index+"").text(fwcs*jxyz*parseInt(scalar));
+    }
 </script>
 </html>

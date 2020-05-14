@@ -31,6 +31,11 @@ public class AssessmentPlan {
      */
     private String state;
 
+    /**
+     *  更新时间
+     */
+    private String updateTime;
+
     public String getPlanName() {
         return planName;
     }
@@ -69,5 +74,13 @@ public class AssessmentPlan {
 
     public void setState(String state) {
         this.state = state;
+    }
+
+    public String getUpdateTime() {
+        return updateTime;
+    }
+
+    public void setUpdateTime(String updateTime) {
+        this.updateTime = updateTime;
     }
 }

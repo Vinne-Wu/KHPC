@@ -84,6 +84,11 @@ public class RegisterServiceImpl implements RegisterService {
             return new JsonResult<>(MsgCode.SCCESS_CODE,"方案已经存在！",resultMap);
         }
         // 新增方案
+        // 时间设置
+        Date currentTime = new Date();
+        SimpleDateFormat formatter = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+        String dateString = formatter.format(currentTime);
+        plan.setUpdateTime(dateString);
         MongoCore.addOne(plan,"assessmentplan");
         // 查询方案ID
         Map<String,Object> plan1 = (Map<String, Object>) MongoCore.selectOne(criteria,Map.class,"assessmentplan");
@@ -118,5 +123,30 @@ public class RegisterServiceImpl implements RegisterService {
         criteria.and("planId").is(planId).and("indexCode").is(indexCode);
         MongoCore.delete(criteria,"index");
         return new JsonResult<>(MsgCode.SCCESS_CODE,"删除成功！",null);
+    }
+
+    @Override
+    public JsonResult<Map<String, Object>> searchKHFA(String departName, String khyf, String khnf) {
+        // 回调结果
+        Map<String,Object> resultMap = new HashMap<>(4);
+        //查询
+        Criteria criteria = new Criteria();
+        criteria.and("departName").is(departName)
+                .and("khnf").is(khnf)
+                .and("khyf").is(khyf)
+                .and("state").is("1");
+        List<Map<String,Object>> list = MongoCore.selectList(criteria,Map.class,"assessmentplan");
+        if(list.size() > 0){
+            String planId = list.get(0).get("_id").toString();
+            Criteria criteria1 = new Criteria();
+            criteria1.and("planId").is(planId);
+            List<JxIndex> list1 = MongoCore.selectList(criteria1,JxIndex.class,"index");
+            resultMap.put("indexList",list1);
+            resultMap.put("faList",list);
+            return new JsonResult<>(MsgCode.SCCESS_CODE,"查询成功!",resultMap);
+        }
+        resultMap.put("indexList",null);
+        resultMap.put("faList",list);
+        return new JsonResult<>(MsgCode.SCCESS_CODE,"查询成功!",resultMap);
     }
 }

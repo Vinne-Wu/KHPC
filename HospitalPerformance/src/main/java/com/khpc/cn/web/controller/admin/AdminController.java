@@ -186,4 +186,29 @@ public class AdminController {
         return adminService.stopOrStartOperate(id,state);
     }
 
+    /**
+     *  检索考核方案
+     * @param planName
+     * @param khnf
+     * @param khyf
+     * @return
+     */
+    @RequestMapping("/searchPlans")
+    @ResponseBody
+    public JsonResult<Map<String,Object>> searchPlans(String planName,String khnf,String khyf){
+        return adminService.searchPlans(planName,khnf,khyf);
+    }
+
+    /**
+     *  通过或者拒绝方案申请
+     * @param planName
+     * @param khnf
+     * @param khyf
+     * @return
+     */
+    @RequestMapping("/passOrRefuse")
+    @ResponseBody
+    public JsonResult<Map<String,Object>> passOrRefuse(String planName,String departName,String khnf,String khyf,String code){
+        return adminService.passOrRefuse(planName,departName,khnf,khyf,code);
+    }
 }

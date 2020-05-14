@@ -7,6 +7,9 @@
     <link rel="stylesheet" type="text/css" href="/static/iform/css/WdatePicker.css" />
     <link rel="stylesheet" type="text/css" href="/static/iform/css/skin_/table.css" />
     <link rel="stylesheet" type="text/css" href="/static/iform/css/jquery.grid.css" />
+    <script src="/static/assets/js/jquery-1.11.1.min.js"></script>
+    <script src="/static/assets/bootstrap/js/bootstrap.min.js"></script>
+    <link rel="stylesheet" href="/static/assets/bootstrap/css/bootstrap.min.css">
 </head>
 
 <body>
@@ -21,46 +24,37 @@
                             <span class="choose">
                                 <label>方案名称:</label>
                                 <div class="kv-item-content">
-                                    <input type="text" placeholder=""  style="width: 85%"/>
+                                    <input type="text" placeholder=""  style="width: 85%" id="planName"/>
                                 </div>
                             </span>
 
                             <span class="choose">
                                 <label>年份:</label>
                                 <div class="kv-item-content">
-                                    <select>
-                                        <option>2019年</option>
-                                        <option selected="selected">2020年</option>
-                                        <option>2021年</option>
+                                    <select id="khnf" style="width:100px;">
+                                        <option value="2019">2019年</option>
+                                        <option value="2020" selected="selected">2020年</option>
+                                        <option value="2021">2021年</option>
                                     </select>
                                 </div>
                             </span>
 
-                            <span  class="choose" id="khyf">
+                            <span  class="choose">
                                 <label>月份:</label>
                                 <div class="kv-item-content">
-                                    <select id="khyfs">
-                                        <option value=1>1月</option>
-                                        <option value=2>2月</option>
-                                        <option selected="selected" value=3>3月</option>
-                                        <option value=4>4月</option>
-                                        <option value=5>5月</option>
-                                        <option value=6>6月</option>
-                                        <option value=7>7月</option>
-                                        <option value=8>8月</option>
-                                        <option value=9>9月</option>
-                                        <option value=10>10月</option>
-                                        <option value=11>11月</option>
-                                        <option value=12>12月</option>
-                                    </select>
-                                </div>
-                            </span>
-
-                            <span  class="choose" id="khrq">
-                                <label>日期:</label>
-                                <div class="kv-item-content">
-                                    <select id="khrqs">
-                                        <option value=9>9</option>
+                                    <select id="khyf" style="width:100px;">
+                                        <option value="1">1月</option>
+                                        <option value="2">2月</option>
+                                        <option value="3">3月</option>
+                                        <option value="4">4月</option>
+                                        <option value="5" selected="selected">5月</option>
+                                        <option value="6">6月</option>
+                                        <option value="7">7月</option>
+                                        <option value="8">8月</option>
+                                        <option value="9">9月</option>
+                                        <option value="10">10月</option>
+                                        <option value="11">11月</option>
+                                        <option value="12">12月</option>
                                     </select>
                                 </div>
                             </span>
@@ -68,7 +62,7 @@
                     </div>
                 </div>
                 <div class="search-button">
-                    <input class="button" type="button" value="查询" />
+                    <input class="button" type="button" value="查询" onclick="searchPlans()"/>
                 </div>
             </div>
 
@@ -93,7 +87,22 @@
                     </span>
                 </div>
 
-                <div class="grid"></div>
+                <div>
+                    <table class="table table-bordered table-hover">
+                        <thead style="background-color:#f6f6f6">
+                        <tr>
+                            <th>方案名称</th>
+                            <th>科室名称</th>
+                            <th>提交时间</th>
+                            <th>是否审核</th>
+                            <th>操作</th>
+                        </tr>
+                        </thead>
+                        <tbody id="tableData">
+
+                        </tbody>
+                    </table>
+                </div>
 
                 <div class="pagination"></div>
             </div>
@@ -101,103 +110,20 @@
     </div>
 </div>
 </body>
-<script type="text/javascript" src="/static/iform/js/jquery.js"></script>
-<script type="text/javascript" src="/static/iform/js/global.js"></script>
+<!--<script type="text/javascript" src="/static/iform/js/jquery.js"></script>-->
+<!--<script type="text/javascript" src="/static/iform/js/global.js"></script>-->
 <script type="text/javascript" src="/static/iform/js/jquery.select.js"></script>
 <script type="text/javascript" src="/static/iform/js/core.js"></script>
 <script type="text/javascript" src="/static/iform/js/jquery.pagination.js"></script>
 <script type="text/javascript" src="/static/iform/js/jquery.grid.js"></script>
 <script type="text/javascript" src="/static/iform/js/WdatePicker.js"></script>
 <script type="text/javascript">
-    $('select').select();
-    var head = [{
-        label: '方案名称',
-        width: 180,
-        name: 'ks'
-    },{
-        label: '科室名称',
-        width: 120,
-        sortable: 'default',
-        name: 'id'
-    },{
-        label:'科室编码',
-        width: 350,
-        name:'name'
-    },{
-        label:'提交时间',
-        width:150
-    },{
-        label: '是否审核',
-        width: 150
-    },{
-        label: '审核日期',
-        width: 150
-    },{
-        label: '审核人',
-        width: 150
-    }];
-
-    var oper = [{label:'-',onclick:function(){
-            alert('-');
-        }},{label:'-',onclick: function(){
-            alert('-')
-        }}]
-
-    var oper2 = [{label:'通过',onclick:function(){
-            alert('通过');
-        }},{label:'驳回',onclick: function(){
-            alert('驳回')
-        }}]
-
-    var tbody = [
-        ["2020一季度绩效方案","护理科","N01","2020-02-01","已审核","2020-02-01","王五",oper],
-        ["2020二季度绩效方案","护理科","N01","2020-03-07","未审核","-","-",oper2],
-        ["2019四季度绩效方案","呼吸科","N02","2020-02-01","已审核","2019-09-01","王五",oper],
-        ["2019三季度绩效方案","肿瘤科","N03","2020-02-01","已审核","2019-09-01","王五",oper],
-        ["2019二季度绩效方案","护理科","N01","2020-02-01","已审核","2019-09-01","王五",oper]
-    ]
-
-    $('.grid').Grid({
-        thead: head,
-        tbody: null,
-        height:400,
-        checkbox: {
-            single:true
-        },
-        operator: {
-            type : "normal",
-            width : 100
-        },
-        sortCallBack : function(name,index,type){
-            alert(name+","+index+','+type);
-        }
-
-    });
-
-    $('.grid').Grid('addLoading');
-
-    /// 模拟异步
-    setTimeout(function(){
-        $('.grid').Grid('setData',tbody, head);
-    },2000)
-
-
-    $('.pagination').pagination(100,{
-        callback: function(page){
-            alert(page);
-        },
-        display_msg: false
-    });
-
-    $('.search-box input[type=radio]').click(function(e) {
-        if($(this).prop('checked')){
-            if($(this).attr('data-define') === 'define'){
-                $('.define-input').show();
-            }else{
-                $('.define-input').hide();
-            }
-        }
-    });
+    // $('.pagination').pagination(100,{
+    //     callback: function(page){
+    //         alert(page);
+    //     },
+    //     display_msg: false
+    // });
 
     /**
      * 加载考核日期
@@ -223,7 +149,96 @@
 
     // 初始化
     $(document).ready(function() {
-        loadDays();
+       // loadDays();
+        searchPlans();
     });
+
+    /**
+     *  检索考核方案
+     */
+    function searchPlans(){
+        $.ajax({
+            url: "/admin/searchPlans",
+            type: "post",
+            dataType: "json", //jsonp会把请求类型强制转换为get请求
+            data:{
+                "planName":$("#planName").val(),
+                "khnf":$("#khnf").val(),
+                "khyf":$("#khyf").val()
+            },
+            async: true, //异步请求
+            success: function(data) {
+                let list = data.result.list;
+                $("#tableData").empty();
+                if(list.length>0){
+                    $.each(list,function (index,item) {
+                        $("#tableData").append(displanPlan(item));
+                    });
+                }
+            },
+            error: function(jqXHR, textStatus, errorThrown){
+                alert("数据处理异常！");
+            }
+        });
+    }
+
+    /**
+     * 遍历方案
+     */
+    function displanPlan(item) {
+        let departName = "外科";
+        if(item.departName =='surgery'){
+            departName = '外科';
+        }
+        let isSh = '通过';
+        let content = '<a onclick=passOrRefuse("'+item.planName+'","'+item.departName+'","'+item.khnf+'","'+item.khyf+'","-1")>驳回</a>';
+        if(item.state == '-1'){
+            isSh = '未通过';
+            content = '<a onclick=passOrRefuse("'+item.planName+'","'+item.departName+'","'+item.khnf+'","'+item.khyf+'","1")>通过</a>&nbsp;&nbsp;&nbsp;&nbsp;';
+        }
+        if(item.state == '0'){
+            isSh = '未审核';
+            content = '<a onclick=passOrRefuse("'+item.planName+'","'+item.departName+'","'+item.khnf+'","'+item.khyf+'","1")>通过</a>&nbsp;&nbsp;&nbsp;&nbsp;' +
+                '<a onclick=passOrRefuse("'+item.planName+'","'+item.departName+'","'+item.khnf+'","'+item.khyf+'","-1")>驳回</a>';
+        }
+
+        let html = ' <tr>' +
+            '        <td>'+item.planName+'</td>\n' +
+            '        <td>'+departName+'</td>\n' +
+            '        <td>'+item.updateTime+'</td>\n' +
+            '        <td>'+isSh+'</td>\n' +
+            '        <td>'+content+'</td>' +
+            '</tr>';
+
+        return html;
+    }
+
+    /**
+     *  通过或者驳回 操作
+     */
+    function passOrRefuse(planName,departName,khnf,khyf,code) {
+        $.ajax({
+            url: "/admin/passOrRefuse",
+            type: "post",
+            dataType: "json", //jsonp会把请求类型强制转换为get请求
+            data:{
+                "planName":planName,
+                "departName":departName,
+                "khnf":khnf,
+                "khyf":khyf,
+                "code":code
+            },
+            async: true, //异步请求
+            success: function(data) {
+                alert(data.message);
+
+                // 刷新方案列表
+                searchPlans();
+            },
+            error: function(jqXHR, textStatus, errorThrown){
+                alert("数据处理异常！");
+            }
+        });
+    }
 </script>
 </html>

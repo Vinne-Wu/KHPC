@@ -18,6 +18,15 @@
                 <div class="search-area">
                     <div class="kv-item ue-clear">
                         <div class="kv-item ue-clear">
+                           <span class="choose">
+                                <label>考核方案:</label>
+                                <div class="kv-item-content">
+                                    <select>
+                                        <option>第二季度考核方案2</option>
+                                    </select>
+                                </div>
+                            </span>
+
                             <span class="choose">
                                 <label>考核年份:</label>
                                 <div class="kv-item-content">
@@ -29,15 +38,15 @@
                                 </div>
                             </span>
 
-                            <span  class="choose" id="khyf">
+                            <span  class="choose">
                                 <label>考核月份:</label>
                                 <div class="kv-item-content">
-                                    <select id="khyfs">
+                                    <select id="khyf">
                                         <option value=1>1月</option>
                                         <option value=2>2月</option>
-                                        <option selected="selected" value=3>3月</option>
+                                        <option value=3>3月</option>
                                         <option value=4>4月</option>
-                                        <option value=5>5月</option>
+                                        <option value=5 selected="selected" >5月</option>
                                         <option value=6>6月</option>
                                         <option value=7>7月</option>
                                         <option value=8>8月</option>
@@ -53,7 +62,7 @@
                                 <label>考核日期:</label>
                                 <div class="kv-item-content">
                                     <select id="khrqs">
-                                        <option value=9>9</option>
+                                        <option value=14>14</option>
                                     </select>
                                 </div>
                             </span>
@@ -165,19 +174,7 @@
             alert('编辑')
         }}]
     var tbody = [
-        ["护理科","N01001","护理记录单","1","1","12",12,"2020-2-15","已审核",oper],
-        ["护理科","N01002","晨间护理","2","2","4",8,"2020-2-15","已审核",oper],
-        ["护理科","N01003","幼儿身体清洁","3","3","7",21,"2020-2-15","已审核",oper],
-        ["护理科","N01004","健康指导","2","2","3",6,"2020-2-15","已审核",oper],
-        ["护理科","N01005","夜班","15","15","4",60,"2020-2-15","已审核",oper],
-        ["护理科","N01006","病人六洁","8","8","2",16,"2020-2-15","已审核",oper],
-        ["护理科","N01007","病房环境","4","4","8",32,"2020-2-15","已审核",oper],
-        ["护理科","N01008","入院教育","3","3","8",24,"2020-2-15","已审核",oper],
-        ["护理科","N01009","出院教育","3","3","10",30,"2020-2-15","已审核",oper],
-        ["护理科","N010010","健康指导","4","4","2",16,"2020-2-15","已审核",oper],
-        ["护理科","N010011","基础操作","10","10","17",170,"2020-2-15","已审核",oper],
-        ["护理科","N010012","辅班","10","10","18",180,"2020-2-15","已审核",oper],
-        ["护理科","N010013","主班","20","20","8",160,"2020-2-15","已审核",oper]
+        ["外科","N01001","护理","1","2","3",6,"2020-2-15","已审核",oper]
        ]
 
     $('.grid').Grid({

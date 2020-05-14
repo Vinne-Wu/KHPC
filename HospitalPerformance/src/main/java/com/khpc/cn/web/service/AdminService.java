@@ -45,4 +45,23 @@ public interface AdminService {
      * @return
      */
     JsonResult<Map<String,Object>> stopOrStartOperate(String id,String state);
+
+    /**
+     *  检索方案
+     * @param planName
+     * @param khnf
+     * @param khyf
+     * @return
+     */
+    JsonResult<Map<String,Object>> searchPlans(String planName,String khnf,String khyf);
+
+    /**
+     *  通过或者拒绝方案申请
+     * @param planName
+     * @param khnf
+     * @param khyf
+     * @param code
+     * @return
+     */
+    JsonResult<Map<String,Object>> passOrRefuse(String planName,String departName,String khnf,String khyf,String code);
 }

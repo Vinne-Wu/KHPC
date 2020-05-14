@@ -168,4 +168,17 @@ public class RegisterController {
     public JsonResult<Map<String,Object>> removeIndex(String planId,String indexCode){
         return registerService.removeIndex(planId,indexCode);
     }
+
+    /**
+     *  检索方案及其指标信息
+     * @param departName
+     * @param khyf
+     * @param khnf
+     * @return
+     */
+    @RequestMapping("/searchKHFA")
+    @ResponseBody
+    public JsonResult<Map<String,Object>> searchKHFA(String departName,String khyf,String khnf){
+        return registerService.searchKHFA(departName,khyf,khnf);
+    }
 }
